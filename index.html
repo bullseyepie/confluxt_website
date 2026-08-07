@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Conflux, a prefab merge tool for Unity</title>
+<meta name="description" content="Conflux is a prefab merge tool for Unity. Three-way prefab conflicts resolved per property, in three synchronized panels, against a live merged preview.">
+
+<!-- Link previews, for the forum thread and anywhere else this gets posted.
+     Set og:url once the site is live. -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Conflux, a prefab merge tool for Unity">
+<meta property="og:description" content="Three-way prefab conflicts resolved per property, in three synchronized panels, against a merged preview you can open in Prefab Mode.">
+<meta property="og:url" content="">
+<meta property="og:image" content="store/social-1200x630.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="store/icon-160x160.png">
+<link rel="apple-touch-icon" href="store/icon-160x160.png">
+
+<!-- Orbitron, to match the logo's wordmark. Only the word "Conflux" uses it; it's a display
+     face and unreadable at body sizes. See style.css for a self-hosting note. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="wrap">
+    <span class="brand"><img src="store/icon-200x200-transparent.png" alt=""><span class="name">Con<span class="flux">flux</span></span></span>
+    <a href="#features">Features</a>
+    <a href="#how">How it works</a>
+    <a href="#limitations">Limitations</a>
+    <a class="nav-cta" href="https://assetstore.unity.com/packages/tools/utilities/conflux-398020">Get Conflux</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <h1 class="wordmark"><img src="store/icon-200x200-transparent.png" alt=""><span class="name">Con<span class="flux">flux</span></span></h1>
+    <p class="lede">
+      A <strong>prefab merge tool</strong> for Unity. It resolves three-way conflicts by what a
+      prefab means instead of what its text looks like, one property at a time, in three
+      synchronized panels, against a merged preview you can open.
+    </p>
+    <div class="motivation">
+      <p>
+        Every merge conflict on a prefab is the same afternoon. Git hands you two walls of YAML it
+        can't reconcile, your merge tool offers to take one side whole, and whichever one you pick
+        throws away work somebody did. Sometimes the file won't open afterwards. The worse case is
+        when it opens fine and the prefab is quietly broken in a way nobody catches for a week.
+      </p>
+      <p>
+        None of that is Git's fault. What a prefab actually contains is component types, references
+        and nested overrides, and none of it survives being compared as lines of text, so a
+        line-based tool is being asked a question it has no way to answer. This one asks a different
+        question: parse all three sides into a real object model, compare them field by field, and
+        let Unity's own APIs rebuild the result.
+      </p>
+    </div>
+
+    <div class="hero-actions">
+      <a class="cta" href="https://assetstore.unity.com/packages/tools/utilities/conflux-398020">Get Conflux</a>
+      <p class="menu-path"><span>Tools</span> › <span>Conflux</span> › <span>Merge</span></p>
+    </div>
+  </div>
+</header>
+
+<main id="features">
+
+  <section class="feature">
+    <div class="feature-text">
+      <h2>Semantic three-way diff</h2>
+      <p>
+        Every GameObject, component and property gets classified against the common ancestor:
+        added, removed, changed on one side, changed the same way on both, or a real clash.
+        Only the clashes are a question for you. The rest merge on their own.
+      </p>
+    </div>
+    <figure class="feature-shot">
+      <a class="zoom" href="shots/markers.png"><img src="shots/markers.png" alt="Status markers on hierarchy rows across all three panels, with the toolbar tally above them"></a>
+      <figcaption>Markers on every row, and a running tally of each kind along the toolbar.</figcaption>
+    </figure>
+  </section>
+
+  <section class="feature">
+    <div class="feature-text">
+      <h2>Three panels, one row layout</h2>
+      <p>
+        Ours, Merged and Theirs sit side by side, each with its own hierarchy and inspector.
+        Selection, expansion and scrolling stay in step. All three columns share one row plan, so a
+        property lands at the same height in every column by construction, not by syncing scroll
+        positions and hoping. Drag a column's header to rearrange the three into whatever order
+        you read best.
+      </p>
+    </div>
+    <figure class="feature-shot">
+      <a class="zoom" href="shots/window.png"><img src="shots/window.png" alt="The three-panel Conflux window with a real conflict open"></a>
+      <figcaption>Ours, Merged and Theirs, sharing one row plan across all three columns.</figcaption>
+    </figure>
+  </section>
+
+  <section class="feature">
+    <div class="feature-text">
+      <h2>Resolve as coarsely or as finely as you want</h2>
+      <p>
+        One arrow takes a whole GameObject or component from one side. If you'd rather go property
+        by property, every diffing row carries its own picker. Choosing an entity cascades into
+        whatever is still undecided beneath it and leaves anything you already decided alone.
+      </p>
+    </div>
+    <figure class="feature-shot">
+      <a class="zoom" href="shots/pickers.png"><img src="shots/pickers.png" alt="Inspector rows showing each side's value and the picker that chooses between them"></a>
+      <figcaption>Each side's value in its own column, with the picker on Merged. Click to enlarge.</figcaption>
+    </figure>
+  </section>
+
+  <section class="feature">
+    <div class="feature-text">
+      <h2>A merged preview you can open</h2>
+      <p>
+        The merged result is rebuilt from scratch after every decision and opens in Unity's real
+        Prefab Mode. It's the actual prefab, built by the same APIs that will write it when you hit
+        Apply.
+      </p>
+    </div>
+    <figure class="feature-shot">
+      <a class="zoom" href="shots/prefab-mode.png"><img src="shots/prefab-mode.png" alt="The merged prefab open in Unity's Prefab Mode below the Conflux window"></a>
+      <figcaption>The merged result staged as a real prefab, open in Prefab Mode below the window.</figcaption>
+    </figure>
+  </section>
+
+  <section class="feature">
+    <div class="feature-text">
+      <h2>Structure gets its own decisions</h2>
+      <p>
+        Sibling order, component order and reparenting are tracked apart from values, so a reorder
+        on one branch and an edit on the other can both survive. When neither side's order is what
+        you want, arrange it yourself in the Merged panel.
+      </p>
+    </div>
+    <figure class="feature-shot">
+      <a class="zoom" href="shots/structure.png"><img src="shots/structure.png" alt="Order, reparent and manual arrange controls on the Merged panel"></a>
+      <figcaption>The Merged column's right edge: order, placement and manual arrange.</figcaption>
+    </figure>
+  </section>
+
+  <section class="feature-pair">
+    <div>
+      <h3>Keep both</h3>
+      <p>
+        Two branches that each appended to an array of object references, two UnityEvent listeners
+        say, don't have to lose one. A third option keeps both, in order, with no duplicates. It's
+        deliberately narrow and only appears where a union is actually well defined.
+      </p>
+    </div>
+    <div>
+      <h3>Sample conflicts, built in</h3>
+      <p>
+        Twelve hand-built scenarios: value clashes, modify/delete, reorders, reparents, an array
+        both branches appended to, nested overrides, and one that stacks all of them five levels
+        deep. They open through the same pipeline a real conflict does, so they're a decent way to
+        learn the window before a real merge is on fire.
+      </p>
+    </div>
+  </section>
+
+  <section class="feature-pair">
+    <div>
+      <h3>Whatever you version with</h3>
+      <p>
+        Git, Subversion, Mercurial, Perforce and Plastic SCM. Detection is automatic, and only the
+        step that fetches the three versions differs between them, so everything you see and every
+        decision you make is identical either way. Plastic needs its external merge tool pointed at
+        Conflux once; the launcher is generated for you.
+      </p>
+    </div>
+    <div>
+      <h3>It backs up before it overwrites</h3>
+      <p>
+        Apply offers to save the prefab as it stood on your side before the merge, taken from the
+        clean version rather than the marker-riddled file in your working copy. It lands in
+        <code>ConfluxBackups/</code> beside <code>Assets/</code>, so it's never imported as a second
+        prefab. If the backup can't be written, nothing is overwritten.
+      </p>
+    </div>
+  </section>
+
+</main>
+
+<section class="wrap block" id="how">
+  <h2>How a merge goes</h2>
+  <ol class="steps">
+    <li>Start a merge that produces conflicts on <code>.prefab</code> files under <code>Assets/</code>.</li>
+    <li>Open <strong>Tools › Conflux › Merge</strong>. Conflicted prefabs are listed down the left.</li>
+    <li>Resolve. Per entity from the hierarchy rows, per property from the inspector.</li>
+    <li>Follow the toolbar tally (conflicts, changes, identical changes, additions, deletions, reorders) and jump between unresolved items with <strong>▲ / ▼</strong>.</li>
+    <li><strong>Apply</strong> writes the merged prefab over the conflicted file. It stays disabled until nothing is left unresolved.</li>
+  </ol>
+  <p class="note">
+    Apply writes the file and stops. No <code>git add</code>, no <code>p4 resolve</code>, no
+    <code>svn resolved</code>. Marking a conflict resolved is what declares a merge finished, and
+    that's your call to make once you've looked at the result. A wrong file is recoverable. A
+    conflict you resolved by mistake quietly isn't.
+  </p>
+</section>
+
+<section class="wrap block" id="limitations">
+  <h2>Limitations</h2>
+  <p>Worth knowing before you build a workflow on it:</p>
+  <ul class="limits">
+    <li><strong>Prefabs only.</strong> Scene (<code>.unity</code>) conflicts aren't supported. Scenes have many roots plus settings singletons that would diff happily and then never rebuild.</li>
+    <li><strong>Custom editors aren't drawn.</strong> A component with a <code>[CustomEditor]</code> shows its default field list, with no custom layout or buttons. This one is structural: keeping rows aligned across three columns means knowing each row's height before drawing it, and <code>OnInspectorGUI</code> won't tell you. Custom property <em>drawers</em> do work.</li>
+    <li><strong>The inspector is read-only.</strong> It's there to compare. A value enters the merge by picking a side, not by typing.</li>
+    <li><strong>Unpacked nested prefabs get flagged, not merged.</strong> Unpacking regenerates fileIDs across the whole subtree, so there's nothing left to match up. You get a warning strip instead of a confident wrong answer.</li>
+    <li><strong>The preview is a snapshot, not a live link.</strong> Each refresh re-saves and reopens the stage, so the Scene View framing resets.</li>
+    <li><strong>Plastic SCM needs a one-time setup.</strong> It has no conflict list to read, so it hands each conflict to an external merge tool. Generate the launcher from Preferences and point Plastic at it, then merges appear in the sidebar on their own.</li>
+    <li><strong>Only Git has been run against real conflicts so far.</strong> The other four are written against their documented CLI behaviour and covered by parser tests, not by a live merge yet.</li>
+    <li><strong>Only exercised on Windows so far.</strong> Nothing in it is Windows-specific and paths go through the platform's own APIs, but macOS and Linux haven't been run yet.</li>
+    <li><strong>Nested-prefab overrides are lightly exercised.</strong> Per-override diffing, pickers and instance re-creation are implemented. If you merge a conflict with per-branch overrides on a nested instance, watch the Console for <code>Conflux:</code> warnings about unresolvable override targets.</li>
+  </ul>
+</section>
+
+<section class="wrap block" id="technical">
+  <h2>Technical details</h2>
+  <ul class="plain">
+    <li><strong>Unity 2021.2+</strong>. <code>PrefabStageUtility</code> moved out of the <code>Experimental</code> namespace in 2021.2, which sets the floor; the rest of the API surface has been stable since 2018.3.</li>
+    <li><strong>Editor-only.</strong> Nothing ships in a build and nothing runs at runtime.</li>
+    <li><strong>Git, Subversion, Mercurial, Perforce and Plastic SCM</strong> (Unity Version Control). Detection is automatic; pin one in Preferences if a project sits under two at once.</li>
+    <li><strong>No dependencies.</strong> It talks to the version control CLI already on your machine. No packages, no services.</li>
+    <li><strong>Unity does the serialization.</strong> The merged prefab is written with <code>SaveAsPrefabAsset</code>, so the tool never emits YAML by hand and stays largely immune to prefab-format changes.</li>
+    <li><strong>Resolutions are cached</strong> per merge attempt, keyed by a hash of all three source versions, so changing any of them drops a stale resolution instead of silently resuming it.</li>
+    <li><strong>English and Portuguese.</strong> A translation is one JSON file named by its language code, and any key it omits falls back to English, so a partial one is perfectly usable.</li>
+    <li>Written without C# 8+ syntax so it keeps compiling on the language versions that came with older editors.</li>
+  </ul>
+</section>
+
+<section class="wrap block closing">
+  <h2>Get Conflux</h2>
+  <p>
+    On the Unity Asset Store. If you hit a conflict it can't handle, send it my way, real broken
+    prefabs are the only thing that makes a merge tool better.
+  </p>
+  <!-- TODO: forum thread URL -->
+  <p class="cta-row">
+    <a class="cta" href="https://assetstore.unity.com/packages/tools/utilities/conflux-398020">Get Conflux</a>
+    <a class="cta-secondary" href="#">Forum thread</a>
+  </p>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>Conflux, a prefab merge tool for Unity.</p>
+  </div>
+</footer>
+
+<div id="lightbox" class="lightbox" hidden>
+  <img alt="">
+  <p class="lightbox-hint">Click anywhere or press Esc to close</p>
+</div>
+
+<script>
+(function () {
+  var box = document.getElementById('lightbox');
+  var full = box.querySelector('img');
+
+  function open(href, alt) {
+    full.src = href;
+    full.alt = alt || '';
+    box.hidden = false;
+    document.body.style.overflow = 'hidden';
+  }
+
+  function close() {
+    box.hidden = true;
+    full.removeAttribute('src'); // so a reopen cannot flash the previous shot
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll('a.zoom').forEach(function (link) {
+    link.addEventListener('click', function (e) {
+      // Let modified clicks through: a new tab is a reasonable thing to want here.
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
+
+      e.preventDefault();
+      var img = link.querySelector('img');
+      open(link.getAttribute('href'), img ? img.alt : '');
+    });
+  });
+
+  box.addEventListener('click', close);
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && !box.hidden) close();
+  });
+})();
+</script>
+
+</body>
+</html>
