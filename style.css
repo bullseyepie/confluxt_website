@@ -12,17 +12,21 @@
   --radius: 8px;
 }
 
-/* Orbitron is loaded from Google Fonts in index.html. To self-host instead (one less external
-   request, and it sidesteps the EU rulings about Google Fonts serving visitor IPs), drop the
-   .woff2 files in docs/fonts/ and swap the <link> for:
+/* Orbitron, self-hosted. Served from this origin rather than Google Fonts, so the page makes
+   no third-party request and no visitor IP reaches anyone else. That is one less thing for a
+   privacy policy to explain, and it removes the exposure the German Google Fonts rulings were
+   about. SIL Open Font License, so shipping the file with the site is permitted.
 
-     @font-face {
-       font-family: 'Orbitron';
-       src: url('fonts/orbitron-700.woff2') format('woff2');
-       font-weight: 700; font-display: swap;
-     }
+   Only the word "Conflux" uses it: it is a display face and unreadable at body sizes. Google
+   serves Orbitron as a single latin subset, so one file covers the whole face. */
+@font-face {
+  font-family: 'Orbitron';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('fonts/orbitron-700-latin.woff2') format('woff2');
+}
 
-   Orbitron is SIL Open Font License, so redistributing it with the site is fine. */
 .wordmark,
 .topnav .brand {
   font-family: 'Orbitron', 'Eurostile', 'Bank Gothic', sans-serif;
