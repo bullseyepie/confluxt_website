@@ -120,7 +120,7 @@
       <p>
         The merged result is rebuilt from scratch after every decision and opens in Unity's real
         Prefab Mode. It's the actual prefab, built by the same APIs that will write it when you hit
-        Apply.
+        Apply. Each refresh re-saves and reopens the stage, so the Scene View framing resets.
       </p>
     </div>
     <figure class="feature-shot">
@@ -230,10 +230,7 @@
   <ul class="limits">
     <li><strong>Prefabs only.</strong> Scene (<code>.unity</code>) conflicts aren't supported. Scenes have many roots plus settings singletons that would diff happily and then never rebuild.</li>
     <li><strong>Custom editors aren't drawn.</strong> A component with a <code>[CustomEditor]</code> shows its default field list, with no custom layout or buttons. This one is structural: keeping rows aligned across three columns means knowing each row's height before drawing it, and <code>OnInspectorGUI</code> won't tell you. Custom property <em>drawers</em> do work.</li>
-    <li><strong>The inspector is read-only.</strong> It's there to compare. A value enters the merge by picking a side, not by typing.</li>
     <li><strong>Unpacked nested prefabs get flagged, not merged.</strong> Unpacking regenerates fileIDs across the whole subtree, so there's nothing left to match up. You get a warning strip instead of a confident wrong answer.</li>
-    <li><strong>The preview is a snapshot, not a live link.</strong> Each refresh re-saves and reopens the stage, so the Scene View framing resets.</li>
-    <li><strong>Plastic SCM needs a one-time setup.</strong> It has no conflict list to read, so it hands each conflict to an external merge tool. Generate the launcher from Preferences and point Plastic at it, then merges appear in the sidebar on their own.</li>
     <li><strong>Git is the one that has been proven.</strong> Real conflicts out of real repositories, continuously, including a captured real-world prefab variant conflict. Subversion, Mercurial, Perforce and the Plastic handoff are written against their documented CLI behaviour and covered by parser tests, but have not been run through a live merge yet.</li>
     <li><strong>Only exercised on Windows so far.</strong> Nothing in it is Windows-specific and paths go through the platform's own APIs, but macOS and Linux haven't been run yet.</li>
     <li><strong>A variant needs its base resolved first.</strong> A merged variant is rebuilt against its base prefab, so if that base can't be loaded, almost always because it's conflicted too, the result would be written without it. Conflux refuses to open the variant and marks the row, rather than letting you work through it and hit a wall at the end.</li>
@@ -247,7 +244,7 @@
   <ul class="plain">
     <li><strong>Unity 2021.2+</strong>. <code>PrefabStageUtility</code> moved out of the <code>Experimental</code> namespace in 2021.2, which sets the floor; the rest of the API surface has been stable since 2018.3.</li>
     <li><strong>Editor-only.</strong> Nothing ships in a build and nothing runs at runtime.</li>
-    <li><strong>Git, Subversion, Mercurial, Perforce and Plastic SCM</strong> (Unity Version Control). Detection is automatic; pin one in Preferences if a project sits under two at once.</li>
+    <li><strong>Git, Subversion, Mercurial, Perforce and Plastic SCM</strong> (Unity Version Control). Detection is automatic; pin one in Preferences if a project sits under two at once. Plastic has no conflict list to read, so it hands each conflict to an external merge tool: generate the launcher from Preferences and point Plastic at it once, and merges then appear in the sidebar on their own.</li>
     <li><strong>No dependencies.</strong> It talks to the version control CLI already on your machine. No packages, no services.</li>
     <li><strong>Unity does the serialization.</strong> The merged prefab is written with <code>SaveAsPrefabAsset</code>, so the tool never emits YAML by hand and stays largely immune to prefab-format changes.</li>
     <li><strong>Resolutions are cached</strong> per merge attempt, keyed by a hash of all three source versions, so changing any of them drops a stale resolution instead of silently resuming it.</li>
