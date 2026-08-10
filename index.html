@@ -29,7 +29,8 @@
     <a href="#features">Features</a>
     <a href="#how">How it works</a>
     <a href="#limitations">Limitations</a>
-    <a class="nav-cta" href="https://assetstore.unity.com/packages/tools/utilities/conflux-398020">Get Conflux</a>
+    <!-- Swap back to the Asset Store URL once the listing is published. -->
+    <a class="nav-cta" href="https://discussions.unity.com/t/conflux-prefab-merge-tool-for-unity/1733311">Follow progress</a>
   </div>
 </nav>
 
@@ -58,7 +59,7 @@
     </div>
 
     <div class="hero-actions">
-      <a class="cta" href="https://assetstore.unity.com/packages/tools/utilities/conflux-398020">Get Conflux</a>
+      <a class="cta" href="https://discussions.unity.com/t/conflux-prefab-merge-tool-for-unity/1733311">Follow progress</a>
       <p class="menu-path"><span>Tools</span> › <span>Conflux</span> › <span>Merge</span></p>
     </div>
   </div>
@@ -210,7 +211,7 @@
   <h2>How a merge goes</h2>
   <ol class="steps">
     <li>Start a merge that produces conflicts on <code>.prefab</code> files under <code>Assets/</code>.</li>
-    <li>Open <strong>Tools › Conflux › Merge</strong>. Conflicted prefabs are listed down the left.</li>
+    <li>Open <strong>Tools &rsaquo; Conflux &rsaquo; Merge</strong>. Conflicted prefabs are listed down the left. <strong>Open</strong> starts fresh; <strong>Resume</strong> restores the decisions you made last time, so a big merge doesn't have to be one sitting.</li>
     <li>Resolve. Per entity from the hierarchy rows, per property from the inspector.</li>
     <li>Follow the toolbar tally (conflicts, changes, identical changes, additions, deletions, reorders) and jump between unresolved items with <strong>▲ / ▼</strong>.</li>
     <li><strong>Apply</strong> writes the merged prefab over the conflicted file. It stays disabled until nothing is left unresolved.</li>
@@ -233,9 +234,9 @@
     <li><strong>Unpacked nested prefabs get flagged, not merged.</strong> Unpacking regenerates fileIDs across the whole subtree, so there's nothing left to match up. You get a warning strip instead of a confident wrong answer.</li>
     <li><strong>The preview is a snapshot, not a live link.</strong> Each refresh re-saves and reopens the stage, so the Scene View framing resets.</li>
     <li><strong>Plastic SCM needs a one-time setup.</strong> It has no conflict list to read, so it hands each conflict to an external merge tool. Generate the launcher from Preferences and point Plastic at it, then merges appear in the sidebar on their own.</li>
-    <li><strong>Only Git has been run against real conflicts so far.</strong> The other four are written against their documented CLI behaviour and covered by parser tests, not by a live merge yet.</li>
+    <li><strong>Git is the one that has been proven.</strong> Real conflicts out of real repositories, continuously, including a captured real-world prefab variant conflict. Subversion, Mercurial, Perforce and the Plastic handoff are written against their documented CLI behaviour and covered by parser tests, but have not been run through a live merge yet.</li>
     <li><strong>Only exercised on Windows so far.</strong> Nothing in it is Windows-specific and paths go through the platform's own APIs, but macOS and Linux haven't been run yet.</li>
-    <li><strong>A variant needs its base resolved first.</strong> A merged variant is rebuilt against its base prefab, so if that base can't be loaded — almost always because it's conflicted too — the result would be written without it. Conflux refuses to open the variant and marks the row, rather than letting you work through it and hit a wall at the end.</li>
+    <li><strong>A variant needs its base resolved first.</strong> A merged variant is rebuilt against its base prefab, so if that base can't be loaded, almost always because it's conflicted too, the result would be written without it. Conflux refuses to open the variant and marks the row, rather than letting you work through it and hit a wall at the end.</li>
     <li><strong>Nested instances of an unresolvable prefab still open, but can't be applied.</strong> Where a variant is refused up front, an ordinary nested instance is only caught at Apply: the rest of that merge resolves normally, and it is only the write that would drop content.</li>
     <li><strong>Nested instances that aren't variants are lightly exercised.</strong> Per-override diffing, pickers and instance re-creation all run, and the variant work covered most of that code. A conflict with per-branch overrides on an ordinary nested instance hasn't been merged for real yet, so watch the Console for <code>Conflux:</code> warnings about unresolvable override targets.</li>
   </ul>
@@ -256,19 +257,18 @@
 </section>
 
 <section class="wrap block closing">
-  <h2>Get Conflux</h2>
+  <h2>Coming to the Asset Store</h2>
   <p>
-    On the Unity Asset Store. If you hit a conflict it can't handle, send it my way, real broken
-    prefabs are the only thing that makes a merge tool better.
+    The listing isn't live yet. Until it is, the forum thread is where updates land. If you hit a
+    conflict it can't handle, send it my way, real broken prefabs are the only thing that makes a
+    merge tool better.
   </p>
-  <!-- TODO: forum thread URL -->
   <p class="note purchase-note">
     Purchases are completed through the Unity Asset Store. Licensing, payment, downloads and
     refunds are handled by Unity, not by this site.
   </p>
   <p class="cta-row">
-    <a class="cta" href="https://assetstore.unity.com/packages/tools/utilities/conflux-398020">Get Conflux</a>
-    <a class="cta-secondary" href="#">Forum thread</a>
+    <a class="cta" href="https://discussions.unity.com/t/conflux-prefab-merge-tool-for-unity/1733311">Follow progress on the forum</a>
   </p>
 </section>
 
