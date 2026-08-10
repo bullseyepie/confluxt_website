@@ -155,10 +155,10 @@
     <div>
       <h3>Sample conflicts, built in</h3>
       <p>
-        Twelve hand-built scenarios: value clashes, modify/delete, reorders, reparents, an array
-        both branches appended to, nested overrides, and one that stacks all of them five levels
-        deep. They open through the same pipeline a real conflict does, so they're a decent way to
-        learn the window before a real merge is on fire.
+        Thirteen hand-built scenarios: value clashes, modify/delete, reorders, reparents, an array
+        both branches appended to, nested overrides, a prefab variant, and one that stacks all of
+        them five levels deep. They open through the same pipeline a real conflict does, so they're
+        a decent way to learn the window before a real merge is on fire.
       </p>
     </div>
   </section>
@@ -180,6 +180,26 @@
         clean version rather than the marker-riddled file in your working copy. It lands in
         <code>ConfluxBackups/</code> beside <code>Assets/</code>, so it's never imported as a second
         prefab. If the backup can't be written, nothing is overwritten.
+      </p>
+    </div>
+  </section>
+
+  <section class="feature-pair">
+    <div>
+      <h3>Prefab variants</h3>
+      <p>
+        A variant's file has almost nothing in it: a reference to its base and a few stubs.
+        Conflux reads the base and shows the inherited hierarchy inline, so a variant's panels
+        look like the prefab does in the Inspector rather than like the three objects the file
+        happens to contain. Overrides and renames on inherited objects come with it.
+      </p>
+    </div>
+    <div>
+      <h3>Send a broken merge back</h3>
+      <p>
+        If a merge comes out wrong, the window's tab menu exports a single zip: the three staged
+        versions exactly as your version control produced them, the decisions you made, and your
+        Unity version. It asks before it packages anything and sends nothing anywhere.
       </p>
     </div>
   </section>
@@ -215,7 +235,8 @@
     <li><strong>Plastic SCM needs a one-time setup.</strong> It has no conflict list to read, so it hands each conflict to an external merge tool. Generate the launcher from Preferences and point Plastic at it, then merges appear in the sidebar on their own.</li>
     <li><strong>Only Git has been run against real conflicts so far.</strong> The other four are written against their documented CLI behaviour and covered by parser tests, not by a live merge yet.</li>
     <li><strong>Only exercised on Windows so far.</strong> Nothing in it is Windows-specific and paths go through the platform's own APIs, but macOS and Linux haven't been run yet.</li>
-    <li><strong>Nested-prefab overrides are lightly exercised.</strong> Per-override diffing, pickers and instance re-creation are implemented. If you merge a conflict with per-branch overrides on a nested instance, watch the Console for <code>Conflux:</code> warnings about unresolvable override targets.</li>
+    <li><strong>A variant needs its base resolved first.</strong> A merged variant is rebuilt against its base prefab, so if that base can't be loaded — almost always because it's conflicted too — the result would be written without it. Conflux refuses to open the variant and marks the row, rather than letting you work through it and hit a wall at the end.</li>
+    <li><strong>Nested instances that aren't variants are lightly exercised.</strong> Per-override diffing, pickers and instance re-creation all run, and the variant work covered most of that code. A conflict with per-branch overrides on an ordinary nested instance hasn't been merged for real yet, so watch the Console for <code>Conflux:</code> warnings about unresolvable override targets.</li>
   </ul>
 </section>
 
