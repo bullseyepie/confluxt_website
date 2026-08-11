@@ -148,9 +148,10 @@
     <div>
       <h3>Keep both</h3>
       <p>
-        Two branches that each appended to an array of object references, two UnityEvent listeners
-        say, don't have to lose one. A third option keeps both, in order, with no duplicates. It's
-        deliberately narrow and only appears where a union is actually well defined.
+        Where both branches appended to the same list, take both. It starts from one side, adds
+        what the other has that's missing, keeps the order and skips duplicates. It works for 
+        references, for strings and for lists of your own structs, without Conflux needing to know 
+        anything about the type.
       </p>
     </div>
     <div>
@@ -177,10 +178,32 @@
     <div>
       <h3>It backs up before it overwrites</h3>
       <p>
-        Apply offers to save the prefab as it stood on your side before the merge, taken from the
+        Before it overwrites anything, Apply spells out what will change in the file on your side:
+        what's added, removed, moved, and which property of which object ends up different.
+        Apply also offers to save the prefab as it stood on your side before the merge, taken from the
         clean version rather than the marker-riddled file in your working copy. It lands in
         <code>ConfluxBackups/</code> beside <code>Assets/</code>, so it's never imported as a second
         prefab. If the backup can't be written, nothing is overwritten.
+      </p>
+    </div>
+  </section>
+
+  <section class="feature-pair">
+    <div>
+      <h3>Built for a whole branch merge</h3>
+      <p>
+        A branch merge rarely conflicts in one prefab. The sidebar counts how many of the listed
+        conflicts already hold a merged result, and applying one opens the next that still needs
+        merging, so seven files isn't seven round trips. Turn that off in Preferences if you'd
+        rather stay on the result you just wrote.
+      </p>
+    </div>
+    <div>
+      <h3>No apply all</h3>
+      <p>
+        Deliberately absent. Every write asks first and says what it will change, and a batch
+        would either skip that after the first file or ask you once per file anyway. Overwriting
+        prefabs in someone's repository is not a thing to do behind a single confirmation.
       </p>
     </div>
   </section>
