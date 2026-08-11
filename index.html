@@ -235,7 +235,7 @@
     <li><strong>Only exercised on Windows so far.</strong> Nothing in it is Windows-specific and paths go through the platform's own APIs, but macOS and Linux haven't been run yet.</li>
     <li><strong>A variant needs its base resolved first.</strong> A merged variant is rebuilt against its base prefab, so if that base can't be loaded, almost always because it's conflicted too, the result would be written without it. Conflux refuses to open the variant and marks the row, rather than letting you work through it and hit a wall at the end.</li>
     <li><strong>Nested instances of an unresolvable prefab still open, but can't be applied.</strong> Where a variant is refused up front, an ordinary nested instance is only caught at Apply: the rest of that merge resolves normally, and it is only the write that would drop content.</li>
-    <li><strong>Nested instances that aren't variants are lightly exercised.</strong> Per-override diffing, pickers and instance re-creation all run, and the variant work covered most of that code. A conflict with per-branch overrides on an ordinary nested instance hasn't been merged for real yet, so watch the Console for <code>Conflux:</code> warnings about unresolvable override targets.</li>
+    <li><strong>Applying a non-variant nested instance is unverified.</strong> Both shapes have been opened against captured real conflicts, a prefab variant and an ordinary nested instance carrying per-branch overrides, and each pass found and fixed real bugs. What hasn't been done is writing a non-variant instance back and reopening the result, so check the file before trusting an Apply on one.</li>
   </ul>
 </section>
 
