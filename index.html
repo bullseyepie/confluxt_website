@@ -104,8 +104,16 @@
       <h2>Resolve as coarsely or as finely as you want</h2>
       <p>
         One arrow takes a whole GameObject or component from one side. If you'd rather go property
-        by property, every diffing row carries its own picker. Choosing an entity cascades into
-        whatever is still undecided beneath it and leaves anything you already decided alone.
+        by property, every diffing row carries its own picker. Narrower wins over wider: refine a
+        property after taking a branch and the refinement sticks, while a fresh pick at a wider
+        scope answers for that whole scope again and discards the refinements under it.
+      </p>
+      <p>
+        Changes only one side made get pickers too, not just clashes. They resolve to Theirs by
+        default, so a change of yours the other branch never touched is a decision in front of you
+        rather than something that goes missing without a conflict marker anywhere. Every picker
+        reports on its own scope: an arrow lights only when that side is the sole source of
+        everything decided beneath it, and a scope you drew from both is outlined instead.
       </p>
     </div>
     <figure class="feature-shot">
@@ -148,19 +156,22 @@
     <div>
       <h3>Keep both</h3>
       <p>
-        Where both branches appended to the same list, take both. It starts from one side, adds
-        what the other has that's missing, keeps the order and skips duplicates. It works for 
-        references, for strings and for lists of your own structs, without Conflux needing to know 
-        anything about the type.
+        Where both branches appended to the same list, take both. It starts from Theirs, appends
+        the Ours entries that aren't already present, keeps the order and skips duplicates. Two
+        entries are the same one when every value they're made of agrees, so references, strings
+        and lists of your own structs all work without Conflux knowing anything about the type.
+        The one shape it won't offer is an entry that holds an array of its own.
       </p>
     </div>
     <div>
       <h3>Sample conflicts, built in</h3>
       <p>
-        Thirteen hand-built scenarios: value clashes, modify/delete, reorders, reparents, an array
-        both branches appended to, nested overrides, a prefab variant, and one that stacks all of
-        them five levels deep. They open through the same pipeline a real conflict does, so they're
-        a decent way to learn the window before a real merge is on fire.
+        Fifteen hand-built scenarios: value clashes at two depths, identical edits, modify/delete,
+        sibling and component reorders, reparents, renames and objects added on both sides, an array both
+        branches appended to, nested prefab overrides, a prefab variant, an unpacked nested prefab,
+        and one that stacks all of it five levels deep. They open through the same pipeline a real
+        conflict does, so they're a decent way to learn the window before a real merge is on fire.
+        Only Apply differs: samples are read-only, since there's no conflicted file behind them.
       </p>
     </div>
   </section>
@@ -182,8 +193,9 @@
         what's added, removed, moved, and which property of which object ends up different.
         Apply also offers to save the prefab as it stood on your side before the merge, taken from the
         clean version rather than the marker-riddled file in your working copy. It lands in
-        <code>ConfluxBackups/</code> beside <code>Assets/</code>, so it's never imported as a second
-        prefab. If the backup can't be written, nothing is overwritten.
+        <code>ConfluxBackups/</code> in the project folder, or wherever you point it in Preferences;
+        aim it inside <code>Assets/</code> and backups get a <code>.bak</code> extension so Unity
+        never imports one as a second prefab. If the backup can't be written, nothing is overwritten.
       </p>
     </div>
   </section>
@@ -210,12 +222,14 @@
 
   <section class="feature-pair">
     <div>
-      <h3>Prefab variants</h3>
+      <h3>Variants and nested prefabs</h3>
       <p>
         A variant's file has almost nothing in it: a reference to its base and a few stubs.
         Conflux reads the base and shows the inherited hierarchy inline, so a variant's panels
         look like the prefab does in the Inspector rather than like the three objects the file
-        happens to contain. Overrides and renames on inherited objects come with it.
+        happens to contain. Overrides and renames on inherited objects come with it, and an
+        ordinary nested instance is read the same way, so a per-branch override lands on the
+        object it belongs to.
       </p>
     </div>
     <div>
@@ -237,6 +251,7 @@
     <li>Open <strong>Tools &rsaquo; Conflux &rsaquo; Merge</strong>. Conflicted prefabs are listed down the left. <strong>Open</strong> starts fresh; <strong>Resume</strong> restores the decisions you made last time, so a big merge doesn't have to be one sitting.</li>
     <li>Resolve. Per entity from the hierarchy rows, per property from the inspector.</li>
     <li>Follow the toolbar tally (conflicts, changes, identical changes, additions, deletions, reorders) and jump between unresolved items with <strong>▲ / ▼</strong>.</li>
+    <li>Check the result with <strong>Preview</strong> (the ◫ button), which opens the merged prefab in Prefab Mode.</li>
     <li><strong>Apply</strong> writes the merged prefab over the conflicted file. It stays disabled until nothing is left unresolved.</li>
   </ol>
   <p class="note">
@@ -252,7 +267,9 @@
   <p>Worth knowing before you build a workflow on it:</p>
   <ul class="limits">
     <li><strong>Prefabs only.</strong> Scene (<code>.unity</code>) conflicts aren't supported. Scenes have many roots plus settings singletons that would diff happily and then never rebuild.</li>
-    <li><strong>Custom editors aren't drawn.</strong> A component with a <code>[CustomEditor]</code> shows its default field list, with no custom layout or buttons. This one is structural: keeping rows aligned across three columns means knowing each row's height before drawing it, and <code>OnInspectorGUI</code> won't tell you. Custom property <em>drawers</em> do work.</li>
+    <li><strong>Custom editors aren't drawn.</strong> A component with a <code>[CustomEditor]</code> shows its default field list, with no custom layout or buttons. This one is structural: keeping rows aligned across three columns means knowing each row's height before drawing it, and <code>OnInspectorGUI</code> won't tell you. Custom property <em>drawers</em> do work. One side effect: Conflux can show more fields than Unity does, since a field a custom editor chooses not to draw is still visible to the property iterator.</li>
+    <li><strong>The inspector is read-only.</strong> It's a comparison view. A value enters the merge by picking a side, not by typing.</li>
+    <li><strong>The preview is a snapshot, not a live link.</strong> Each refresh re-saves and reopens the stage, so the Scene View's framing resets.</li>
     <li><strong>Unpacked nested prefabs get flagged, not merged.</strong> Unpacking regenerates fileIDs across the whole subtree, so there's nothing left to match up. You get a warning strip instead of a confident wrong answer.</li>
     <li><strong>Git is the one that has been proven.</strong> Real conflicts out of real repositories, continuously, including a captured real-world prefab variant conflict. Subversion, Mercurial, Perforce and the Plastic handoff are written against their documented CLI behaviour and covered by parser tests, but have not been run through a live merge yet.</li>
     <li><strong>Only exercised on Windows so far.</strong> Nothing in it is Windows-specific and paths go through the platform's own APIs, but macOS and Linux haven't been run yet.</li>
@@ -269,6 +286,11 @@
     <li><strong>Editor-only.</strong> Nothing ships in a build and nothing runs at runtime.</li>
     <li><strong>Git, Subversion, Mercurial, Perforce and Plastic SCM</strong> (Unity Version Control). Detection is automatic; pin one in Preferences if a project sits under two at once. Plastic has no conflict list to read, so it hands each conflict to an external merge tool: generate the launcher from Preferences and point Plastic at it once, and merges then appear in the sidebar on their own.</li>
     <li><strong>No dependencies.</strong> It talks to the version control CLI already on your machine. No packages, no services.</li>
+    <li><strong>Full C# source, no DLLs.</strong> Nothing in it is a black box.</li>
+    <li><strong>Render pipeline agnostic.</strong> Built-in, URP and HDRP behave the same, since the tool draws editor UI and never touches rendering.</li>
+    <li><strong>It can be an external merge tool for any of the five.</strong> The launcher takes base, ours, theirs and output in that order, which is what makes <code>git mergetool</code> in a terminal open the conflict in an Editor that's already running.</li>
+    <li><strong>Exclusive checkout is respected.</strong> Under Perforce and Plastic, Apply runs <code>p4 edit</code> if the file is read-only, and never clears the read-only bit behind the server's back.</li>
+    <li><strong>An EditMode test suite</strong> of around 40 fixtures covers parsing, diffing and resolution as plain data, and the merged result as real Unity objects with their component values asserted. Some of it runs against captured real conflicts shipped with the package.</li>
     <li><strong>Unity does the serialization.</strong> The merged prefab is written with <code>SaveAsPrefabAsset</code>, so the tool never emits YAML by hand and stays largely immune to prefab-format changes.</li>
     <li><strong>Resolutions are cached</strong> per merge attempt, keyed by a hash of all three source versions, so changing any of them drops a stale resolution instead of silently resuming it.</li>
     <li><strong>English and Portuguese.</strong> A translation is one JSON file named by its language code, and any key it omits falls back to English, so a partial one is perfectly usable.</li>
