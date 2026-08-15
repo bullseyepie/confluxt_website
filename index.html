@@ -202,6 +202,32 @@
 
   <section class="feature-pair">
     <div>
+      <h3>It checks what it wrote</h3>
+      <p>
+        Every merge tool tells you it succeeded. This one reads the file back through Unity's own
+        loader afterwards and compares it with the result you approved: every object, every
+        component and its position in the list, every serialized value, every reference, resolved
+        by where it points rather than by an id the write renumbers. Agreement is silent. A
+        difference is named, object by object and property by property, along with where your
+        backup went. It's a self-check, not a second opinion, and it catches the half no
+        confirmation dialog can: what Unity's serializer did after you clicked.
+      </p>
+    </div>
+    <div>
+      <h3>Deletions inside a nested prefab</h3>
+      <p>
+        A variant doesn't leave a deleted object out of its file, it records that it removed one.
+        Read the overrides and ignore that list, as tools do, and the branch that deleted something
+        quietly loses the argument: the merged prefab hands the object back. Conflux reads it, marks
+        the object deleted on that side, ghosts the row, and asks. Delete on one side and edit on
+        the other and it's a clash, which is exactly what it is. Components removed from an
+        instance work the same way.
+      </p>
+    </div>
+  </section>
+
+  <section class="feature-pair">
+    <div>
       <h3>Built for a whole branch merge</h3>
       <p>
         A branch merge rarely conflicts in one prefab. The sidebar counts how many of the listed
@@ -252,7 +278,7 @@
     <li>Resolve. Per entity from the hierarchy rows, per property from the inspector.</li>
     <li>Follow the toolbar tally (conflicts, changes, identical changes, additions, deletions, reorders) and jump between unresolved items with <strong>▲ / ▼</strong>.</li>
     <li>Check the result with <strong>Preview</strong> (the ◫ button), which opens the merged prefab in Prefab Mode.</li>
-    <li><strong>Apply</strong> writes the merged prefab over the conflicted file. It stays disabled until nothing is left unresolved.</li>
+    <li><strong>Apply</strong> writes the merged prefab over the conflicted file, then reads it back and checks it against the result you approved. It stays disabled until nothing is left unresolved.</li>
   </ol>
   <p class="note">
     Apply writes the file and stops. No <code>git add</code>, no <code>p4 resolve</code>, no
@@ -275,7 +301,7 @@
     <li><strong>Only exercised on Windows so far.</strong> Nothing in it is Windows-specific and paths go through the platform's own APIs, but macOS and Linux haven't been run yet.</li>
     <li><strong>A variant needs its base resolved first.</strong> A merged variant is rebuilt against its base prefab, so if that base can't be loaded, almost always because it's conflicted too, the result would be written without it. Conflux refuses to open the variant and marks the row, rather than letting you work through it and hit a wall at the end.</li>
     <li><strong>Nested instances of an unresolvable prefab still open, but can't be applied.</strong> Where a variant is refused up front, an ordinary nested instance is only caught at Apply: the rest of that merge resolves normally, and it is only the write that would drop content.</li>
-    <li><strong>Applying a non-variant nested instance is unverified.</strong> Both shapes have been opened against captured real conflicts, a prefab variant and an ordinary nested instance carrying per-branch overrides, and each pass found and fixed real bugs. What hasn't been done is writing a non-variant instance back and reopening the result, so check the file before trusting an Apply on one.</li>
+    <li><strong>Applying a non-variant nested instance has never been checked by hand.</strong> Both shapes have been opened against captured real conflicts, a prefab variant and an ordinary nested instance carrying per-branch overrides, and each pass found and fixed real bugs. Nobody has written a non-variant instance back and reopened the result. Apply's read-back check covers that ground automatically now, which is not the same as somebody having looked.</li>
   </ul>
 </section>
 
@@ -290,7 +316,7 @@
     <li><strong>Render pipeline agnostic.</strong> Built-in, URP and HDRP behave the same, since the tool draws editor UI and never touches rendering.</li>
     <li><strong>It can be an external merge tool for any of the five.</strong> The launcher takes base, ours, theirs and output in that order, which is what makes <code>git mergetool</code> in a terminal open the conflict in an Editor that's already running.</li>
     <li><strong>Exclusive checkout is respected.</strong> Under Perforce and Plastic, Apply runs <code>p4 edit</code> if the file is read-only, and never clears the read-only bit behind the server's back.</li>
-    <li><strong>An EditMode test suite</strong> of around 40 fixtures covers parsing, diffing and resolution as plain data, and the merged result as real Unity objects with their component values asserted. Some of it runs against captured real conflicts shipped with the package.</li>
+    <li><strong>An EditMode test suite</strong> of 43 fixtures and 471 cases covers parsing, diffing and resolution as plain data, and the merged result as real Unity objects with their values, component order and written file asserted. Some of it runs against captured real conflicts shipped with the package.</li>
     <li><strong>Unity does the serialization.</strong> The merged prefab is written with <code>SaveAsPrefabAsset</code>, so the tool never emits YAML by hand and stays largely immune to prefab-format changes.</li>
     <li><strong>Resolutions are cached</strong> per merge attempt, keyed by a hash of all three source versions, so changing any of them drops a stale resolution instead of silently resuming it.</li>
     <li><strong>English and Portuguese.</strong> A translation is one JSON file named by its language code, and any key it omits falls back to English, so a partial one is perfectly usable.</li>
