@@ -90,7 +90,8 @@
         Selection, expansion and scrolling stay in step. All three columns share one row plan, so a
         property lands at the same height in every column by construction, not by syncing scroll
         positions and hoping. Drag a column's header to rearrange the three into whatever order
-        you read best.
+        you read best. Values are shown rather than edited: one enters the merge by picking a side,
+        so there's no third version of the truth to keep track of.
       </p>
     </div>
     <figure class="feature-shot">
@@ -154,39 +155,6 @@
 
   <section class="feature-pair">
     <div>
-      <h3>Keep both</h3>
-      <p>
-        Where both branches appended to the same list, take both. It starts from Theirs, appends
-        the Ours entries that aren't already present, keeps the order and skips duplicates. Two
-        entries are the same one when every value they're made of agrees, so references, strings
-        and lists of your own structs all work without Conflux knowing anything about the type.
-        The one shape it won't offer is an entry that holds an array of its own.
-      </p>
-    </div>
-    <div>
-      <h3>Sample conflicts, built in</h3>
-      <p>
-        Fifteen hand-built scenarios: value clashes at two depths, identical edits, modify/delete,
-        sibling and component reorders, reparents, renames and objects added on both sides, an array both
-        branches appended to, nested prefab overrides, a prefab variant, an unpacked nested prefab,
-        and one that stacks all of it five levels deep. They open through the same pipeline a real
-        conflict does, so they're a decent way to learn the window before a real merge is on fire.
-        Only Apply differs: samples are read-only, since there's no conflicted file behind them.
-      </p>
-    </div>
-  </section>
-
-  <section class="feature-pair">
-    <div>
-      <h3>Whatever you version with</h3>
-      <p>
-        Git, Subversion, Mercurial, Perforce and Plastic SCM. Detection is automatic, and only the
-        step that fetches the three versions differs between them, so everything you see and every
-        decision you make is identical either way. Plastic needs its external merge tool pointed at
-        Conflux once; the launcher is generated for you.
-      </p>
-    </div>
-    <div>
       <h3>It backs up before it overwrites</h3>
       <p>
         Before it overwrites anything, Apply spells out what will change in the file on your side:
@@ -196,23 +164,6 @@
         <code>ConfluxBackups/</code> in the project folder, or wherever you point it in Preferences;
         aim it inside <code>Assets/</code> and backups get a <code>.bak</code> extension so Unity
         never imports one as a second prefab. If the backup can't be written, nothing is overwritten.
-      </p>
-    </div>
-  </section>
-
-  <section class="feature-pair">
-    <div>
-      <h3>Show only what you're looking for</h3>
-      <p>
-        The tally beside the toolbar is also the filter. Open it and a checkbox slides onto each
-        kind: uncheck one and it leaves the hierarchies and the inspector together, rows, markers,
-        component blocks and property rows alike. An object stays while anything under it still
-        matches, so narrowing to deletions doesn't hide the parents you reach them through, and
-        rows keep how you left them when a kind comes back. Reorders are the exception, and
-        deliberately not a switch: they show only while everything else does, because an order
-        decision covers a whole list and a list with rows filtered out of it isn't one you can
-        answer for. Nothing is hidden from the write, though. The count of what's outstanding
-        still counts all of it, and Apply is still blocked by what you can't see.
       </p>
     </div>
     <div>
@@ -225,26 +176,6 @@
         difference is named, object by object and property by property, along with where your
         backup went. It's a self-check, not a second opinion, and it catches the half no
         confirmation dialog can: what Unity's serializer did after you clicked.
-      </p>
-    </div>
-  </section>
-
-  <section class="feature-pair">
-    <div>
-      <h3>Built for a whole branch merge</h3>
-      <p>
-        A branch merge rarely conflicts in one prefab. The sidebar counts how many of the listed
-        conflicts already hold a merged result, and applying one opens the next that still needs
-        merging, so seven files isn't seven round trips. Turn that off in Preferences if you'd
-        rather stay on the result you just wrote.
-      </p>
-    </div>
-    <div>
-      <h3>No apply all</h3>
-      <p>
-        Deliberately absent. Every write asks first and says what it will change, and a batch
-        would either skip that after the first file or ask you once per file anyway. Overwriting
-        prefabs in someone's repository is not a thing to do behind a single confirmation.
       </p>
     </div>
   </section>
@@ -266,6 +197,82 @@
         back: the branch that deleted something quietly loses the argument. Here it's marked
         deleted on that side, the row is ghosted, and you're asked. Delete on one side against an
         edit on the other is a clash, which is what it is.
+      </p>
+      <p>
+        One shape it won't merge, and says so: an instance one branch unpacked. Unpacking mints
+        fresh fileIDs for the whole subtree, so nothing in it can be matched to what it used to be,
+        and there is no honest merge left to make. You get a warning strip on that side instead of
+        a confident wrong answer.
+      </p>
+    </div>
+    <div>
+      <h3>Whatever you version with</h3>
+      <p>
+        Git, Subversion, Mercurial, Perforce and Plastic SCM. Detection is automatic, and only the
+        step that fetches the three versions differs between them, so everything you see and every
+        decision you make is identical either way. Plastic needs its external merge tool pointed at
+        Conflux once; the launcher is generated for you.
+      </p>
+    </div>
+  </section>
+
+  <section class="feature-pair">
+    <div>
+      <h3>Keep both</h3>
+      <p>
+        Where both branches appended to the same list, take both. It starts from Theirs, appends
+        the Ours entries that aren't already present, keeps the order and skips duplicates. Two
+        entries are the same one when every value they're made of agrees, so references, strings
+        and lists of your own structs all work without Conflux knowing anything about the type.
+        The one shape it won't offer is an entry that holds an array of its own.
+      </p>
+    </div>
+    <div>
+      <h3>Show only what you're looking for</h3>
+      <p>
+        The tally beside the toolbar is also the filter. Open it and a checkbox slides onto each
+        kind: uncheck one and it leaves the hierarchies and the inspector together, rows, markers,
+        component blocks and property rows alike. An object stays while anything under it still
+        matches, so narrowing to deletions doesn't hide the parents you reach them through, and
+        rows keep how you left them when a kind comes back. Reorders are the exception, and
+        deliberately not a switch: they show only while everything else does, because an order
+        decision covers a whole list and a list with rows filtered out of it isn't one you can
+        answer for. Nothing is hidden from the write, though. The count of what's outstanding
+        still counts all of it, and Apply is still blocked by what you can't see.
+      </p>
+    </div>
+  </section>
+
+  <section class="feature-pair">
+    <div>
+      <h3>Built for a whole branch merge</h3>
+      <p>
+        A branch merge rarely conflicts in one prefab. The sidebar counts how many of the listed
+        conflicts already hold a merged result, and applying one opens the next that still needs
+        merging, so seven files isn't seven round trips. Turn that off in Preferences if you'd
+        rather stay on the result you just wrote.
+      </p>
+    </div>
+    <div>
+      <h3>Sample conflicts, built in</h3>
+      <p>
+        Fifteen hand-built scenarios: value clashes at two depths, identical edits, modify/delete,
+        sibling and component reorders, reparents, renames and objects added on both sides, an array both
+        branches appended to, nested prefab overrides, a prefab variant, an unpacked nested prefab,
+        and one that stacks all of it five levels deep. They open through the same pipeline a real
+        conflict does, so they're a decent way to learn the window before a real merge is on fire.
+        Only Apply differs: samples are read-only, since there's no conflicted file behind them.
+      </p>
+    </div>
+  </section>
+
+  <section class="feature-pair">
+    <div>
+      <h3>No apply all</h3>
+      <p>
+        Deliberately absent. Every write asks first and says what it will change, and a batch
+        would either skip that after the first file or ask you once per file anyway. Overwriting
+        prefabs in someone's repository is not a thing to do behind a single confirmation.
       </p>
     </div>
     <div>
@@ -304,9 +311,6 @@
   <ul class="limits">
     <li><strong>Prefabs only.</strong> Scene (<code>.unity</code>) conflicts aren't supported. Scenes have many roots plus settings singletons that would diff happily and then never rebuild.</li>
     <li><strong>Custom editors aren't drawn.</strong> A component with a <code>[CustomEditor]</code> shows its default field list, with no custom layout or buttons. This one is structural: keeping rows aligned across three columns means knowing each row's height before drawing it, and <code>OnInspectorGUI</code> won't tell you. Custom property <em>drawers</em> do work. One side effect: Conflux can show more fields than Unity does, since a field a custom editor chooses not to draw is still visible to the property iterator.</li>
-    <li><strong>The inspector is read-only.</strong> It's a comparison view. A value enters the merge by picking a side, not by typing.</li>
-    <li><strong>The preview is a snapshot, not a live link.</strong> Each refresh re-saves and reopens the stage, so the Scene View's framing resets.</li>
-    <li><strong>Unpacked nested prefabs get flagged, not merged.</strong> Unpacking regenerates fileIDs across the whole subtree, so there's nothing left to match up. You get a warning strip instead of a confident wrong answer.</li>
     <li><strong>Git is the one that has been proven.</strong> Real conflicts out of real repositories, continuously, including a captured real-world prefab variant conflict. Subversion, Mercurial, Perforce and the Plastic handoff are written against their documented CLI behaviour and covered by parser tests, but have not been run through a live merge yet.</li>
     <li><strong>Only exercised on Windows so far.</strong> Nothing in it is Windows-specific and paths go through the platform's own APIs, but macOS and Linux haven't been run yet.</li>
     <li><strong>A variant needs its base resolved first.</strong> A merged variant is rebuilt against its base prefab, so if that base can't be loaded, almost always because it's conflicted too, the result would be written without it. Conflux refuses to open the variant and marks the row, rather than letting you work through it and hit a wall at the end.</li>
@@ -322,15 +326,13 @@
     <li><strong>Editor-only.</strong> Nothing ships in a build and nothing runs at runtime.</li>
     <li><strong>Git, Subversion, Mercurial, Perforce and Plastic SCM</strong> (Unity Version Control). Detection is automatic; pin one in Preferences if a project sits under two at once. Plastic has no conflict list to read, so it hands each conflict to an external merge tool: generate the launcher from Preferences and point Plastic at it once, and merges then appear in the sidebar on their own.</li>
     <li><strong>No dependencies.</strong> It talks to the version control CLI already on your machine. No packages, no services.</li>
-    <li><strong>Full C# source, no DLLs.</strong> Nothing in it is a black box.</li>
+    <li><strong>Full C# source, no DLLs</strong>, and no C# 8+ syntax, so it keeps compiling on the language versions that came with older editors. Nothing in it is a black box.</li>
     <li><strong>Render pipeline agnostic.</strong> Built-in, URP and HDRP behave the same, since the tool draws editor UI and never touches rendering.</li>
     <li><strong>It can be an external merge tool for any of the five.</strong> The launcher takes base, ours, theirs and output in that order, which is what makes <code>git mergetool</code> in a terminal open the conflict in an Editor that's already running.</li>
     <li><strong>Exclusive checkout is respected.</strong> Under Perforce and Plastic, Apply runs <code>p4 edit</code> if the file is read-only, and never clears the read-only bit behind the server's back.</li>
-    <li><strong>An EditMode test suite</strong> of 44 fixtures and 489 cases covers parsing, diffing and resolution as plain data, and the merged result as real Unity objects with their values, component order and written file asserted. Some of it runs against captured real conflicts shipped with the package.</li>
+    <li><strong>Tested.</strong> An EditMode suite covers parsing, diffing and resolution as plain data, the merged result as real Unity objects, and the written file read back and compared. Some of it runs against captured real conflicts that ship with the package.</li>
     <li><strong>Unity does the serialization.</strong> The merged prefab is written with <code>SaveAsPrefabAsset</code>, so the tool never emits YAML by hand and stays largely immune to prefab-format changes.</li>
-    <li><strong>Resolutions are cached</strong> per merge attempt, keyed by a hash of all three source versions, so changing any of them drops a stale resolution instead of silently resuming it.</li>
     <li><strong>English and Portuguese.</strong> A translation is one JSON file named by its language code, and any key it omits falls back to English, so a partial one is perfectly usable.</li>
-    <li>Written without C# 8+ syntax so it keeps compiling on the language versions that came with older editors.</li>
   </ul>
 </section>
 
