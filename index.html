@@ -331,7 +331,7 @@
     <li><strong>It can be an external merge tool for any of the five.</strong> The launcher takes base, ours, theirs and output in that order, which is what makes <code>git mergetool</code> in a terminal open the conflict in an Editor that's already running.</li>
     <li><strong>Exclusive checkout is respected.</strong> Under Perforce and Plastic, Apply runs <code>p4 edit</code> if the file is read-only, and never clears the read-only bit behind the server's back.</li>
     <li><strong>Tested.</strong> An EditMode suite covers parsing, diffing and resolution as plain data, the merged result as real Unity objects, and the written file read back and compared. Some of it runs against captured real conflicts that ship with the package.</li>
-    <li><strong>Unity does the serialization.</strong> The merged prefab is written with <code>SaveAsPrefabAsset</code>, so the tool never emits YAML by hand and stays largely immune to prefab-format changes.</li>
+    <li><strong>Unity does the serialization.</strong> The merged prefab is written with <code>SaveAsPrefabAsset</code>, so the tool stays largely immune to prefab-format changes. The one thing it edits afterwards is the numbers that identify objects, putting back the ids the merge took from the other branch, and the file is read back and compared before you are told it worked.</li>
     <li><strong>English and Portuguese.</strong> A translation is one JSON file named by its language code, and any key it omits falls back to English, so a partial one is perfectly usable.</li>
   </ul>
 </section>
