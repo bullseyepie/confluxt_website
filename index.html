@@ -110,11 +110,13 @@
         scope answers for that whole scope again and discards the refinements under it.
       </p>
       <p>
-        Changes only one side made get pickers too, not just clashes. They resolve to Theirs by
-        default, so a change of yours the other branch never touched is a decision in front of you
-        rather than something that goes missing without a conflict marker anywhere. Every picker
-        reports on its own scope: an arrow lights only when that side is the sole source of
-        everything decided beneath it, and a scope you drew from both is outlined instead.
+        Changes only one side made get pickers too, not just clashes. They already resolve to the
+        side that made them, so a change of yours the other branch never touched survives without
+        you doing anything, and the picker is there for the other answer: throwing it away on
+        purpose. Every picker reports on its own scope, and only on what somebody decided: an arrow
+        lights when that side is the sole source of everything answered beneath it, a scope drawn
+        from both is outlined instead, and a control nobody has answered shows where the merge
+        lands meanwhile without claiming it as a decision.
       </p>
     </div>
     <figure class="feature-shot">
@@ -346,9 +348,9 @@
 <section class="wrap block closing">
   <h2>Coming to the Asset Store</h2>
   <p>
-    The listing isn't live yet. Until it is, the forum thread is where updates land. If you hit a
-    conflict it can't handle, send it my way, real broken prefabs are the only thing that makes a
-    merge tool better.
+    The listing isn't live yet. Until it is, the forum thread and Discord are where updates land.
+    If you hit a conflict it can't handle, send it my way: real broken prefabs are the only thing
+    that makes a merge tool better.
   </p>
   <p class="note purchase-note">
     Purchases are completed through the Unity Asset Store. Licensing, payment, downloads and
@@ -356,6 +358,7 @@
   </p>
   <p class="cta-row">
     <a class="cta" href="https://discussions.unity.com/t/conflux-prefab-merge-tool-for-unity/1733311">Follow progress on the forum</a>
+    <a class="cta-secondary" href="https://discord.gg/Bf45bwvPCG">Discord</a>
   </p>
 </section>
 
