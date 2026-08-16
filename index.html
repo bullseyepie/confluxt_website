@@ -171,11 +171,18 @@
       <p>
         Every merge tool tells you it succeeded. This one reads the file back through Unity's own
         loader afterwards and compares it with the result you approved: every object, every
-        component and its position in the list, every serialized value, every reference, resolved
-        by where it points rather than by an id the write renumbers. Agreement is silent. A
-        difference is named, object by object and property by property, along with where your
-        backup went. It's a self-check, not a second opinion, and it catches the half no
-        confirmation dialog can: what Unity's serializer did after you clicked.
+        component and its position in the list, every serialized value, every reference.
+        Agreement is silent. A difference is named, object by object and property by property,
+        along with where your backup went. It's a self-check, not a second opinion, and it
+        catches the half no confirmation dialog can: what Unity's serializer did after you
+        clicked.
+      </p>
+      <p>
+        Identity is part of that comparison. A prefab's objects are named from outside the file
+        by an id, so a merge that quietly renumbers them leaves every variant, every scene
+        instance and every reference pointing into the prefab aimed at nothing, while the file
+        itself reads as perfectly correct. Yours keep their ids, the objects arriving from the
+        other branch get theirs back, and the check says so rather than assuming it.
       </p>
     </div>
   </section>
