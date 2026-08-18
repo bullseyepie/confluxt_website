@@ -113,10 +113,16 @@
         Changes only one side made get pickers too, not just clashes. They already resolve to the
         side that made them, so a change of yours the other branch never touched survives without
         you doing anything, and the picker is there for the other answer: throwing it away on
-        purpose. Every picker reports on its own scope, and only on what somebody decided: an arrow
-        lights when that side is the sole source of everything answered beneath it, a scope drawn
-        from both is outlined instead, and a control nobody has answered shows where the merge
-        lands meanwhile without claiming it as a decision.
+        purpose. Every picker reports on its own scope, and what it reports is where that scope's
+        content comes from: an arrow lights when that side is the sole source of it, and a scope
+        drawn from both is outlined instead.
+      </p>
+      <p>
+        Until a scope is settled, its picker fills with how much of it is, left to right, like a
+        progress bar. Every difference counts, not only the clashes, so a branch holding four
+        changes and one open conflict opens four fifths full and completes when you answer the
+        last one. The topmost picker is the whole file's progress, and you can see where the work
+        is left without expanding anything.
       </p>
     </div>
     <figure class="feature-shot">
@@ -131,7 +137,8 @@
       <p>
         The merged result is rebuilt from scratch after every decision and opens in Unity's real
         Prefab Mode. It's the actual prefab, built by the same APIs that will write it when you hit
-        Apply. Each refresh re-saves and reopens the stage, so the Scene View framing resets.
+        Apply. It refreshes as you decide and leaves the Scene View where you put it, so you can
+        frame the part you care about and watch it settle.
       </p>
     </div>
     <figure class="feature-shot">
