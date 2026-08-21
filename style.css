@@ -171,15 +171,11 @@ a { color: var(--accent); }
 
 .topnav a:hover { color: var(--text); }
 
-.nav-cta {
-  padding: 5px 12px;
-  border: 1px solid #3f6f96;
-  border-radius: 6px;
-  background: rgba(90, 169, 230, 0.12);
-  color: var(--accent) !important;
-}
-
-.nav-cta:hover { background: rgba(90, 169, 230, 0.2); }
+/* The social icons in the nav sit smaller than the ones the hero used to carry, to fit the
+   52px bar without crowding it. */
+.nav-social { gap: 8px; }
+.nav-social .social-link { width: 34px; height: 34px; }
+.nav-social .social-link svg { width: 17px; height: 17px; }
 
 /* call to action */
 
@@ -189,6 +185,45 @@ a { color: var(--accent); }
   flex-wrap: wrap;
   gap: 16px;
 }
+
+.social-links { display: flex; gap: 10px; }
+
+/*
+  One icon per destination, each carrying its own brand colour so the three read as three places
+  rather than one repeated button: Unity blue, Discord blurple, Asset Store teal. The colour is
+  the icon at rest and floods the whole chip on hover.
+*/
+.social-link {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--brand);
+  border-radius: var(--radius);
+  background: color-mix(in srgb, var(--brand) 12%, var(--surface-2));
+  color: var(--brand);
+  transition: color 0.2s ease, background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.social-link:hover {
+  color: #fff;
+  background: var(--brand);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px color-mix(in srgb, var(--brand) 40%, transparent);
+}
+
+.social-link.is-unity { --brand: #5a9bd8; }
+.social-link.is-discord { --brand: #5865f2; }
+.social-link.is-store { --brand: #2ec4b6; }
+
+/* The Asset Store icon until the listing is live: dimmed, with a dashed edge, so it reads as a
+   placeholder rather than a working link. */
+.social-link.is-soon {
+  opacity: 0.5;
+  border-style: dashed;
+}
+
+.social-link.is-soon:hover { opacity: 0.85; }
 
 .cta, .cta-secondary {
   display: inline-block;
@@ -247,8 +282,10 @@ a { color: var(--accent); }
     radial-gradient(120% 70% at 18% 0%, rgba(60, 148, 230, 0.16), transparent 60%),
     radial-gradient(90% 60% at 85% 10%, rgba(120, 90, 220, 0.10), transparent 62%),
     linear-gradient(180deg, #202225, var(--bg));
-  padding: 72px 0 56px;
+  padding: 64px 0 48px;
 }
+
+.hero-intro { margin-bottom: 40px; }
 
 /* The grid, at the threshold of visible. It gives the light something to fall on, which is
    most of why a flat dark page reads as flat. */
@@ -363,51 +400,57 @@ p { margin: 0 0 16px; max-width: 68ch; }
   of everything rather than one slide with the rest unreachable.
 */
 .carousel-section {
-  padding: 72px 0 64px;
-  border-bottom: 1px solid var(--line);
+  padding: 0;
 }
 
-.carousel-head {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 24px;
-  margin-bottom: 26px;
-}
+/* The stage the arrows are pinned to. Relative, so each arrow can sit against the image's own
+   edge and ride at its vertical middle rather than in a header above it. */
+.carousel-viewport { position: relative; }
 
-.carousel-head h2 { margin: 0; }
-
-.carousel-controls { display: flex; gap: 10px; flex: none; }
-
+/* Fixed at one height for every slide rather than tracking each image's centre: the shots start
+   at the same top and only differ in how far down they run, so a moving arrow would jump between
+   slides. This sits inside the shorter ones and reads as centred on the taller ones. */
 .carousel-arrow {
-  width: 42px;
-  height: 42px;
+  position: absolute;
+  top: 280px;
+  transform: translateY(-50%);
+  z-index: 3;
+  width: 46px;
+  height: 46px;
   border: 1px solid var(--line);
   border-radius: 50%;
-  background: var(--surface);
+  background: rgba(30, 32, 34, 0.82);
+  backdrop-filter: blur(6px);
   color: var(--text);
-  font-size: 20px;
+  font-size: 22px;
   line-height: 1;
   cursor: pointer;
-  transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease, opacity 0.2s ease;
 }
 
+/* Sat in the page margin beside the shot where there is room, easing onto the image's edge only
+   when the window is too narrow to keep them clear of it. The shot itself stays full width. */
+.carousel-arrow--prev { left: max(8px, calc((100% - var(--shell)) / 2 - 54px)); }
+.carousel-arrow--next { right: max(8px, calc((100% - var(--shell)) / 2 - 54px)); }
+
 .carousel-arrow:hover {
-  border-color: rgba(90, 169, 230, 0.5);
-  background: rgba(90, 169, 230, 0.12);
+  border-color: rgba(90, 169, 230, 0.6);
+  background: rgba(90, 169, 230, 0.9);
   color: #fff;
-  transform: translateY(-1px);
 }
 
 /* Disabled at the ends rather than hidden, so the control does not move under the pointer. */
-.carousel-arrow[disabled] { opacity: 0.35; cursor: default; transform: none; }
+.carousel-arrow[disabled] { opacity: 0.28; cursor: default; }
 
-.carousel-clip {
-  overflow: hidden;
+/* On a phone the shots are short and the swipe does the paging, so the fixed-height arrows would
+   miss the image entirely. Dropped there in favour of the swipe and the dots. */
+@media (max-width: 720px) {
+  .carousel-arrow { display: none; }
 }
 
 .carousel {
   display: flex;
+  align-items: flex-start;
   gap: 0;
   overflow-x: auto;
   overscroll-behavior-x: contain;
@@ -421,42 +464,43 @@ p { margin: 0 0 16px; max-width: 68ch; }
 
 .carousel:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
 
+/* The slide sits at the page's own width, the same gutter as every other section, so the shot is
+   as wide as the panels below it rather than boxed in narrower. */
 .slide {
   flex: 0 0 100%;
   scroll-snap-align: start;
   padding: 0 max(24px, calc((100vw - var(--shell)) / 2 + 24px));
-}
-
-.slide-shot { margin: 0 0 22px; }
-
-/* Heading on the left, the explanation beside it, so a slide stays about as tall as its
-   screenshot however much copy it carries. */
-.slide-text {
-  display: grid;
-  grid-template-columns: minmax(220px, 1fr) 2fr;
-  gap: 32px;
-  align-items: start;
-}
-
-.slide-text h3 {
-  margin: 0;
-  font-size: 23px;
-  letter-spacing: -0.01em;
-}
-
-.slide-text p { margin: 0 0 12px; max-width: 68ch; color: #bfc4ca; font-size: 15px; }
-
-.slide-text p:last-child { margin-bottom: 0; }
-
-.carousel-foot {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  margin-top: 26px;
+  flex-direction: column;
 }
 
-.dots { display: flex; gap: 8px; }
+/* The blue label and heading, above the shot. A fixed floor under it keeps the shot starting at
+   the same height whether the heading runs one line or two. */
+.slide-head { margin: 0 0 22px; min-height: 66px; }
+.slide-head h3 { margin: 0; font-size: 23px; letter-spacing: -0.01em; }
+
+/* The grey description, directly under the shot rather than at the foot of a fixed stage, so it
+   hugs the image whatever height that image is, and runs the full width of the shot instead of
+   stopping short with the rest of the row left empty. */
+.slide-caption {
+  margin: 24px 0 0;
+  max-width: none;
+  color: #b3b9c0;
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+/*
+  The shot sits at the top of the slide with the caption directly beneath it, so the image is
+  never floated in the middle of empty space. It fills the slide width when the capture is large
+  enough, and a smaller capture stays at its own size, centred, rather than blown up and blurred.
+*/
+.slide-shot { margin: 0; }
+.slide-shot .frame { display: block; width: fit-content; max-width: 100%; margin: 0 auto; }
+.slide-shot .frame img { width: auto; height: auto; max-width: 100%; }
+
+/* The blue progress lines, centred under the whole carousel. */
+.dots { display: flex; gap: 8px; justify-content: center; margin-top: 30px; }
 
 .dot {
   width: 26px;
@@ -470,14 +514,6 @@ p { margin: 0 0 16px; max-width: 68ch; }
 }
 
 .dot[aria-selected="true"] { width: 44px; background: var(--accent); }
-
-.carousel-hint { margin: 0; color: var(--muted); font-size: 13px; }
-
-@media (max-width: 860px) {
-  .slide-text { grid-template-columns: 1fr; gap: 14px; }
-  .carousel-head { align-items: center; }
-  .carousel-hint { display: none; }
-}
 
 /* The small accent label above a heading. Editorial rhythm, and it gives the eye somewhere to
    land in a page that is otherwise heading, paragraph, heading, paragraph. */
@@ -730,32 +766,44 @@ a.zoom:hover img { border-color: var(--accent); }
   counter-reset: step;
 }
 
-/* The rail, stopping at the last numeral rather than running past it. */
+/* The rail, running between the first and last numerals rather than past them. */
 .steps::before {
   content: "";
   position: absolute;
   left: 17px;
-  top: 6px;
-  bottom: 22px;
+  top: 13px;
+  bottom: 26px;
   width: 2px;
   background: linear-gradient(180deg, var(--accent), rgba(90, 169, 230, 0.15));
   opacity: 0.5;
 }
 
+/* One rhythm for every step, whatever the line count. Left to shrink to their text, the one-line
+   steps sat tight against the next numeral and the two-line ones spread out, so the numbers
+   alternated close, far, close, and read as pairs rather than a single even run. A common minimum
+   height evens the numerals out and lines the rail's segments up, while the text keeps its normal
+   inline flow (flex here scattered the words into separate columns). */
 .steps li {
   position: relative;
-  margin: 0 0 24px;
+  display: flex;
+  align-items: center;
+  min-height: 48px;
+  padding: 6px 0;
+  margin: 0;
   max-width: 78ch;
   counter-increment: step;
 }
 
-.steps li:last-child { margin-bottom: 0; }
+/* The text kept as one block so the flex row has a single child: flexing the bare list item
+   turned every word and bold run into its own column. */
+.steps li .step-body { display: block; }
 
 .steps li::before {
   content: counter(step);
   position: absolute;
   left: -58px;
-  top: -3px;
+  top: 50%;
+  transform: translateY(-50%);
   display: grid;
   place-items: center;
   width: 36px;
@@ -874,6 +922,14 @@ footer p { margin: 0; }
 
   .frame.scrolls img { width: auto; max-width: none; height: auto; min-width: 680px; }
 
+  /* The carousel shots stay scaled to the slide instead of scrolling inside their frame: they
+     have a tap-to-zoom already, so on a phone they read as a thumbnail you open rather than a
+     window you drag. Overrides the scroll rule above for the carousel only. The fixed desktop
+     stage height is dropped so a phone gives each shot only the room it needs. */
+  .slide-shot { height: auto; margin-bottom: 28px; }
+  .slide-shot .frame.scrolls { overflow: visible; }
+  .slide-shot .frame.scrolls img { width: 100%; min-width: 0; max-width: 100%; max-height: none; height: auto; }
+
   .topnav .wrap { gap: 14px; font-size: 14px; }
-  .topnav a:not(.nav-cta) { display: none; }
+  .topnav .wrap > a { display: none; }
 }

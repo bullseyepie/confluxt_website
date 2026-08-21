@@ -6,7 +6,6 @@
 <title>Conflux, a prefab merge tool for Unity</title>
 <meta name="description" content="Conflux is a prefab merge tool for Unity. Three-way prefab conflicts resolved per property, in three synchronized panels, against a live merged preview.">
 
-<!-- Link previews, for the forum thread and anywhere else this gets posted. -->
 <meta property="og:type" content="website">
 <meta property="og:title" content="Conflux, a prefab merge tool for Unity">
 <meta property="og:description" content="Three-way prefab conflicts resolved per property, in three synchronized panels, against a merged preview you can open in Prefab Mode.">
@@ -29,32 +28,139 @@
     <a href="#features">Features</a>
     <a href="#how">How it works</a>
     <a href="#limitations">Limitations</a>
-    <!-- Swap back to the Asset Store URL once the listing is published. -->
-    <a class="nav-cta" href="https://discussions.unity.com/t/conflux-prefab-merge-tool-for-unity/1733311">Follow progress</a>
+    <div class="social-links nav-social">
+      <a href="https://discussions.unity.com/t/conflux-prefab-merge-tool-for-unity/1733311" title="Unity Forum thread" class="social-link is-unity">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 3h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H9l-5 4V5a2 2 0 0 1 2-2zm3 5a1 1 0 0 0 0 2h10a1 1 0 0 0 0-2H7zm0 4a1 1 0 0 0 0 2h6a1 1 0 0 0 0-2H7z"/></svg>
+      </a>
+      <a href="https://discord.gg/Bf45bwvPCG" title="Discord" class="social-link is-discord">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.095 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.095 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+      </a>
+      <!-- Swap href to the listing URL once it's live and drop the is-soon class. -->
+      <a href="https://discussions.unity.com/t/conflux-prefab-merge-tool-for-unity/1733311" title="Asset Store listing coming soon" class="social-link is-store is-soon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 2 3 6v13a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V6l-3-4H6zm.5 2h11l1.5 2H5l1.5-2zM5 8h14v10H5V8zm4 2a3 3 0 0 0 6 0h2a5 5 0 0 1-10 0H9z"/></svg>
+      </a>
+    </div>
   </div>
 </nav>
 
-<header class="hero">
-  <div class="shell">
+<header class="hero" id="features">
+  <div class="shell hero-intro">
     <h1 class="wordmark"><img src="store/icon-200x200-transparent.png" alt=""><span class="name">Con<span class="flux">flux</span></span></h1>
     <p class="lede">
       A <strong>prefab merge tool</strong> for Unity. Resolve three-way conflicts
       by what a prefab means, not what its text looks like, one property at a time.
     </p>
-
-    <div class="hero-actions">
-      <a class="cta" href="https://discussions.unity.com/t/conflux-prefab-merge-tool-for-unity/1733311">Follow progress</a>
-    </div>
   </div>
 
-  <figure class="hero-shot shell reveal">
-    <a class="zoom" href="shots/window.png">
-      <span class="frame scrolls">
-        <img src="shots/window.png" alt="The three-panel Conflux window with a real prefab conflict open">
-      </span>
-    </a>
-    <figcaption>Three synchronized panels. Ours, Merged and Theirs share one row plan. Click to enlarge.</figcaption>
-  </figure>
+  <div class="carousel-section">
+    <div class="carousel-viewport">
+      <button class="carousel-arrow carousel-arrow--prev" data-dir="-1" type="button" aria-label="Previous feature">&#x2039;</button>
+
+      <div class="carousel" tabindex="0" role="group" aria-label="Feature screenshots, scrollable">
+
+        <article class="slide">
+          <header class="slide-head">
+            <span class="eyebrow">The window</span>
+            <h3>Three synchronized panels</h3>
+          </header>
+          <figure class="slide-shot">
+            <a class="zoom" href="shots/window.png">
+              <span class="frame scrolls">
+                <img src="shots/window.png" alt="The three-panel Conflux window with a real prefab conflict open">
+              </span>
+            </a>
+          </figure>
+          <p class="slide-caption">
+            Ours, Merged and Theirs share one row plan. Selection, expansion
+            and scrolling stay in step. Values are shown rather than edited:
+            one enters the merge by picking a side.
+          </p>
+        </article>
+
+        <article class="slide">
+          <header class="slide-head">
+            <span class="eyebrow">The diff</span>
+            <h3>Semantic three-way diff</h3>
+          </header>
+          <figure class="slide-shot">
+            <a class="zoom" href="shots/markers.png">
+              <span class="frame scrolls">
+                <img src="shots/markers.png" alt="Status markers on hierarchy rows across all three panels, with the toolbar tally above them">
+              </span>
+            </a>
+          </figure>
+          <p class="slide-caption">
+            Every GameObject, component and property is classified against the common
+            ancestor: added, removed, changed on one side, changed the same way on both, or a
+            real clash. Only the clashes need your input. The rest merge on their own.
+          </p>
+        </article>
+
+        <article class="slide">
+          <header class="slide-head">
+            <span class="eyebrow">The pickers</span>
+            <h3>As coarse or as fine as you want</h3>
+          </header>
+          <figure class="slide-shot">
+            <a class="zoom" href="shots/pickers.png">
+              <span class="frame scrolls">
+                <img src="shots/pickers.png" alt="Inspector rows showing each side's value and the picker that chooses between them">
+              </span>
+            </a>
+          </figure>
+          <p class="slide-caption">
+            One arrow takes a whole GameObject or component from one side; every diffing row
+            also carries its own picker. Narrower wins over wider, so a property refined after
+            taking a branch keeps its refinement. Each picker fills like a progress bar as its
+            scope settles.
+          </p>
+        </article>
+
+        <article class="slide">
+          <header class="slide-head">
+            <span class="eyebrow">The preview</span>
+            <h3>A merged preview you can open</h3>
+          </header>
+          <figure class="slide-shot">
+            <a class="zoom" href="shots/prefab-mode.png">
+              <span class="frame scrolls">
+                <img src="shots/prefab-mode.png" alt="The merged prefab open in Unity's Prefab Mode below the Conflux window">
+              </span>
+            </a>
+          </figure>
+          <p class="slide-caption">
+            The merged result is rebuilt after every decision and opens in Unity's Prefab Mode.
+            It is the actual prefab, built by the same APIs that will write it when you hit Apply.
+            It refreshes as you decide, and you can frame the part you care about and watch it settle.
+          </p>
+        </article>
+
+        <article class="slide">
+          <header class="slide-head">
+            <span class="eyebrow">Structure</span>
+            <h3>Structure gets its own decisions</h3>
+          </header>
+          <figure class="slide-shot">
+            <a class="zoom" href="shots/structure.png">
+              <span class="frame scrolls">
+                <img src="shots/structure.png" alt="Order, reparent and manual arrange controls on the Merged panel">
+              </span>
+            </a>
+          </figure>
+          <p class="slide-caption">
+            Sibling order, component order and reparenting are tracked apart from values, so a
+            reorder on one branch and an edit on the other can both survive. When neither side's
+            order is what you want, arrange it yourself in the Merged panel.
+          </p>
+        </article>
+
+      </div>
+
+      <button class="carousel-arrow carousel-arrow--next" data-dir="1" type="button" aria-label="Next feature">&#x203A;</button>
+    </div>
+
+    <div class="dots" role="tablist" aria-label="Choose a feature"></div>
+  </div>
 </header>
 
 <section class="motivation-band reveal">
@@ -78,154 +184,19 @@
   </div>
 </section>
 
-<main id="features">
+<main>
 
-  <section class="carousel-section reveal">
-    <div class="shell carousel-head">
-      <div>
-        <span class="eyebrow">Features</span>
-        <h2>What you actually work in</h2>
-      </div>
-      <div class="carousel-controls">
-        <button class="carousel-arrow" data-dir="-1" type="button" aria-label="Previous feature">&#x2039;</button>
-        <button class="carousel-arrow" data-dir="1" type="button" aria-label="Next feature">&#x203A;</button>
-      </div>
-    </div>
-
-    <div class="carousel" tabindex="0" role="group" aria-label="Feature screenshots, scrollable">
-
-      <article class="slide">
-        <figure class="slide-shot">
-          <a class="zoom" href="shots/markers.png">
-            <span class="frame scrolls">
-              <img src="shots/markers.png" alt="Status markers on hierarchy rows across all three panels, with the toolbar tally above them">
-            </span>
-          </a>
-        </figure>
-        <div class="slide-text">
-          <div>
-            <span class="eyebrow">The diff</span>
-            <h3>Semantic three-way diff</h3>
-          </div>
-          <div>
-            <p>
-              Every GameObject, component and property is classified against the common
-              ancestor: added, removed, changed on one side, changed the same way on both, or a
-              real clash. Only the clashes need your input. The rest merge on their own.
-              Markers sit on every row, with a running tally along the toolbar.
-            </p>
-          </div>
-        </div>
-      </article>
-
-      <article class="slide">
-        <figure class="slide-shot">
-          <a class="zoom" href="shots/pickers.png">
-            <span class="frame scrolls">
-              <img src="shots/pickers.png" alt="Inspector rows showing each side's value and the picker that chooses between them">
-            </span>
-          </a>
-        </figure>
-        <div class="slide-text">
-          <div>
-            <span class="eyebrow">The pickers</span>
-            <h3>As coarse or as fine as you want</h3>
-          </div>
-          <div>
-            <p>
-              One arrow takes a whole GameObject or component from one side; every diffing row
-              also carries its own picker. Narrower wins over wider, so a property refined after
-              taking a branch keeps its refinement. Each picker fills like a progress bar as its
-              scope settles.
-            </p>
-          </div>
-        </div>
-      </article>
-
-      <article class="slide">
-        <figure class="slide-shot">
-          <a class="zoom" href="shots/prefab-mode.png">
-            <span class="frame scrolls">
-              <img src="shots/prefab-mode.png" alt="The merged prefab open in Unity's Prefab Mode below the Conflux window">
-            </span>
-          </a>
-        </figure>
-        <div class="slide-text">
-          <div>
-            <span class="eyebrow">The preview</span>
-            <h3>A merged preview you can open</h3>
-          </div>
-          <div>
-            <p>
-              The merged result is rebuilt after every decision and opens in Unity's Prefab Mode.
-              It is the actual prefab, built by the same APIs that will write it when you hit Apply.
-              It refreshes as you decide, and you can frame the part you care about and watch it settle.
-            </p>
-          </div>
-        </div>
-      </article>
-
-      <article class="slide">
-        <figure class="slide-shot">
-          <a class="zoom" href="shots/structure.png">
-            <span class="frame scrolls">
-              <img src="shots/structure.png" alt="Order, reparent and manual arrange controls on the Merged panel">
-            </span>
-          </a>
-        </figure>
-        <div class="slide-text">
-          <div>
-            <span class="eyebrow">Structure</span>
-            <h3>Structure gets its own decisions</h3>
-          </div>
-          <div>
-            <p>
-              Sibling order, component order and reparenting are tracked apart from values, so a
-              reorder on one branch and an edit on the other can both survive. When neither side's
-              order is what you want, arrange it yourself in the Merged panel.
-            </p>
-          </div>
-        </div>
-      </article>
-
-    </div>
-
-    <div class="shell carousel-foot">
-      <div class="dots" role="tablist" aria-label="Choose a feature"></div>
-      <p class="carousel-hint">Scroll sideways, swipe, or use the arrow keys.</p>
-    </div>
-  </section>
-
-</main>
-
-<section class="cta-band reveal">
-  <div class="shell cta-band-inner">
-    <div>
-      <h2>Coming to the Asset Store</h2>
-      <p>
-        The listing isn't live yet. Until it is, the forum thread and Discord are where updates land.
-        If you hit a conflict it can't handle, send it my way: real broken prefabs are the only thing
-        that makes a merge tool better.
-      </p>
-    </div>
-    <div class="cta-band-actions">
-      <a class="cta" href="https://discussions.unity.com/t/conflux-prefab-merge-tool-for-unity/1733311">Follow progress on the forum</a>
-      <a class="cta-secondary" href="https://discord.gg/Bf45bwvPCG">Discord</a>
-    </div>
-  </div>
-</section>
-
-<section class="shell block reveal" id="how">
+<section class="wrap block reveal" id="how">
   <span class="eyebrow">Start to finish</span>
   <h2>How a merge goes</h2>
   <div class="steps-panel">
   <ol class="steps">
-    <li>Start a merge that produces conflicts on <code>.prefab</code> files under <code>Assets/</code>.</li>
-    <li>Open <strong>Tools &#x203A; Conflux &#x203A; Merge</strong>. Conflicted prefabs are listed down the left. <strong>Open</strong> starts fresh; <strong>Resume</strong> restores your decisions from last time.</li>
-    <li>Resolve. Per entity from the hierarchy rows, per property from the inspector.</li>
-    <li>Follow the toolbar tally, narrow the panels to the kinds you care about with the filter beside it, and jump between unresolved items with <strong>&#x25B2; / &#x25BC;</strong>.</li>
-    <li>Check the result with <strong>Preview</strong>, which opens the merged prefab in Prefab Mode.</li>
-    <li><strong>Apply</strong> writes the merged prefab over the conflicted file, then reads it back and checks it against the result you approved.</li>
+    <li><span class="step-body">Start a merge that produces conflicts on <code>.prefab</code> files under <code>Assets/</code>.</span></li>
+    <li><span class="step-body">Open <strong>Tools &#x203A; Conflux &#x203A; Merge</strong>. Conflicted prefabs are listed down the left. <strong>Open</strong> starts fresh; <strong>Resume</strong> restores your decisions from last time.</span></li>
+    <li><span class="step-body">Resolve. Per entity from the hierarchy rows, per property from the inspector.</span></li>
+    <li><span class="step-body">Follow the toolbar tally, narrow the panels to the kinds you care about with the filter beside it, and jump between unresolved items with <strong>&#x25B2; / &#x25BC;</strong>.</span></li>
+    <li><span class="step-body">Check the result with <strong>Preview</strong>, which opens the merged prefab in Prefab Mode.</span></li>
+    <li><span class="step-body"><strong>Apply</strong> writes the merged prefab over the conflicted file, then reads it back and checks it against the result you approved.</span></li>
   </ol>
   </div>
   <p class="note steps-note">
@@ -376,6 +347,7 @@
   </div>
 </section>
 
+</main>
 
 <footer>
   <div class="wrap">
