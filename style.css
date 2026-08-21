@@ -60,6 +60,9 @@
 
 html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
 
+/* Anchor targets clear the sticky nav rather than landing under it. */
+header[id], section[id] { scroll-margin-top: 64px; }
+
 body {
   margin: 0;
   background: var(--bg);
@@ -128,6 +131,7 @@ a { color: var(--accent); }
   top: 0;
   z-index: 10;
   background: rgba(21, 22, 24, 0.72);
+  -webkit-backdrop-filter: blur(14px) saturate(1.2);
   backdrop-filter: blur(14px) saturate(1.2);
   border-bottom: 1px solid transparent;
   transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
@@ -175,7 +179,7 @@ a { color: var(--accent); }
    52px bar without crowding it. */
 .nav-social { gap: 8px; }
 .nav-social .social-link { width: 34px; height: 34px; }
-.nav-social .social-link svg { width: 17px; height: 17px; }
+.nav-social .social-link .ico { width: 16px; height: 16px; }
 
 /* call to action */
 
@@ -192,6 +196,10 @@ a { color: var(--accent); }
   One icon per destination, each carrying its own brand colour so the three read as three places
   rather than one repeated button: Unity blue, Discord blurple, Asset Store teal. The colour is
   the icon at rest and floods the whole chip on hover.
+
+  The glyph is an external SVG file referenced as an image rather than markup embedded in the page,
+  so the icon set lives on its own. Brand tints are written as plain rgba so no color-mix is needed
+  (older Safari has none).
 */
 .social-link {
   display: grid;
@@ -200,21 +208,48 @@ a { color: var(--accent); }
   height: 44px;
   border: 1px solid var(--brand);
   border-radius: var(--radius);
-  background: color-mix(in srgb, var(--brand) 12%, var(--surface-2));
+  background: var(--brand-wash);
   color: var(--brand);
   transition: color 0.2s ease, background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.social-link:hover {
-  color: #fff;
-  background: var(--brand);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px color-mix(in srgb, var(--brand) 40%, transparent);
+/* An external SVG file loaded as a plain image, its brand colour baked into the file, so it always
+   paints regardless of mask support. */
+.social-link .ico {
+  width: 18px;
+  height: 18px;
+  display: block;
 }
 
-.social-link.is-unity { --brand: #5a9bd8; }
-.social-link.is-discord { --brand: #5865f2; }
-.social-link.is-store { --brand: #2ec4b6; }
+/* Hover lifts the chip and strengthens its own tint rather than flooding it with the brand colour,
+   which would swallow the same-coloured icon. */
+.social-link:hover {
+  background: var(--brand-hover);
+  border-color: var(--brand);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px var(--brand-glow);
+}
+
+.social-link.is-unity {
+  --brand: #5a9bd8;
+  --brand-wash: rgba(90, 155, 216, 0.12);
+  --brand-hover: rgba(90, 155, 216, 0.24);
+  --brand-glow: rgba(90, 155, 216, 0.35);
+}
+
+.social-link.is-discord {
+  --brand: #5865f2;
+  --brand-wash: rgba(88, 101, 242, 0.12);
+  --brand-hover: rgba(88, 101, 242, 0.24);
+  --brand-glow: rgba(88, 101, 242, 0.35);
+}
+
+.social-link.is-store {
+  --brand: #2ec4b6;
+  --brand-wash: rgba(46, 196, 182, 0.12);
+  --brand-hover: rgba(46, 196, 182, 0.24);
+  --brand-glow: rgba(46, 196, 182, 0.35);
+}
 
 /* The Asset Store icon until the listing is live: dimmed, with a dashed edge, so it reads as a
    placeholder rather than a working link. */
@@ -423,6 +458,7 @@ p { margin: 0 0 16px; max-width: 68ch; }
   border: 1px solid var(--line);
   border-radius: 50%;
   background: rgba(30, 32, 34, 0.82);
+  -webkit-backdrop-filter: blur(6px);
   backdrop-filter: blur(6px);
   color: var(--text);
   font-size: 22px;
