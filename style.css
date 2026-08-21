@@ -387,7 +387,7 @@ p { margin: 0 0 16px; max-width: 68ch; }
 
 .note { color: var(--muted); font-size: 15px; }
 
-.steps-note { margin-top: 20px; max-width: 78ch; }
+.steps-note { margin: 20px 0 0; max-width: 78ch; }
 
 /* the feature carousel */
 
@@ -664,11 +664,17 @@ a.zoom:hover img { border-color: var(--accent); }
   A single bordered surface with hairlines between the cells says the whole set is one thing,
   which is what it is: everything the tool does that has no screenshot to show for it.
 */
+/* Padded on top only, like every content section, so the gap above each heading is the same 64px
+   whether the section before it is a plain one or the coloured motivation band (whose own bottom
+   padding sits inside its colour and so does not add to the gap). */
 .details {
   max-width: var(--shell);
   margin: 0 auto;
-  padding: 64px 24px 24px;
+  padding: 64px 24px 0;
 }
+
+/* The last section still needs room before the footer. */
+.details:last-of-type { padding-bottom: 64px; }
 
 .details-head { margin: 0 0 28px; }
 
@@ -730,8 +736,8 @@ a.zoom:hover img { border-color: var(--accent); }
 /* plain blocks */
 
 .block {
-  padding-top: 56px;
-  padding-bottom: 56px;
+  padding-top: 64px;
+  padding-bottom: 0;
 }
 
 .block + .block { border-top: 1px solid var(--line); }
