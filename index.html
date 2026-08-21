@@ -35,341 +35,347 @@
 </nav>
 
 <header class="hero">
-  <div class="wrap">
+  <div class="shell">
     <h1 class="wordmark"><img src="store/icon-200x200-transparent.png" alt=""><span class="name">Con<span class="flux">flux</span></span></h1>
     <p class="lede">
-      A <strong>prefab merge tool</strong> for Unity. It resolves three-way conflicts by what a
-      prefab means instead of what its text looks like, one property at a time, in three
-      synchronized panels, against a merged preview you can open.
+      A <strong>prefab merge tool</strong> for Unity. Resolve three-way conflicts
+      by what a prefab means, not what its text looks like, one property at a time.
     </p>
-    <div class="motivation">
+
+    <div class="hero-actions">
+      <a class="cta" href="https://discussions.unity.com/t/conflux-prefab-merge-tool-for-unity/1733311">Follow progress</a>
+    </div>
+  </div>
+
+  <figure class="hero-shot shell reveal">
+    <a class="zoom" href="shots/window.png">
+      <span class="frame scrolls">
+        <img src="shots/window.png" alt="The three-panel Conflux window with a real prefab conflict open">
+      </span>
+    </a>
+    <figcaption>Three synchronized panels. Ours, Merged and Theirs share one row plan. Click to enlarge.</figcaption>
+  </figure>
+</header>
+
+<section class="motivation-band reveal">
+  <div class="shell motivation-grid">
+    <div>
       <p>
         Every merge conflict on a prefab is the same afternoon. Git hands you two walls of YAML it
         can't reconcile, your merge tool offers to take one side whole, and whichever one you pick
         throws away work somebody did. Sometimes the file won't open afterwards. The worse case is
         when it opens fine and the prefab is quietly broken in a way nobody catches for a week.
       </p>
+    </div>
+    <div>
       <p>
         None of that is Git's fault. What a prefab actually contains is component types, references
-        and nested overrides, and none of it survives being compared as lines of text, so a
-        line-based tool is being asked a question it has no way to answer. This one asks a different
-        question: parse all three sides into a real object model, compare them field by field, and
-        let Unity's own APIs rebuild the result.
+        and nested overrides, and none of it survives being compared as lines of text. This tool asks
+        a different question: parse all three sides into a real object model, compare them field by
+        field, and let Unity's own APIs rebuild the result.
       </p>
     </div>
-
-    <div class="hero-actions">
-      <a class="cta" href="https://discussions.unity.com/t/conflux-prefab-merge-tool-for-unity/1733311">Follow progress</a>
-      <p class="menu-path"><span>Tools</span> › <span>Conflux</span> › <span>Merge</span></p>
-    </div>
   </div>
-</header>
+</section>
 
 <main id="features">
 
-  <section class="feature">
-    <div class="feature-text">
-      <h2>Semantic three-way diff</h2>
-      <p>
-        Every GameObject, component and property gets classified against the common ancestor:
-        added, removed, changed on one side, changed the same way on both, or a real clash.
-        Only the clashes are a question for you. The rest merge on their own.
-      </p>
+  <section class="carousel-section reveal">
+    <div class="shell carousel-head">
+      <div>
+        <span class="eyebrow">Features</span>
+        <h2>What you actually work in</h2>
+      </div>
+      <div class="carousel-controls">
+        <button class="carousel-arrow" data-dir="-1" type="button" aria-label="Previous feature">&#x2039;</button>
+        <button class="carousel-arrow" data-dir="1" type="button" aria-label="Next feature">&#x203A;</button>
+      </div>
     </div>
-    <figure class="feature-shot">
-      <a class="zoom" href="shots/markers.png"><img src="shots/markers.png" alt="Status markers on hierarchy rows across all three panels, with the toolbar tally above them"></a>
-      <figcaption>Markers on every row, and a running tally of each kind along the toolbar.</figcaption>
-    </figure>
-  </section>
 
-  <section class="feature">
-    <div class="feature-text">
-      <h2>Three panels, one row layout</h2>
-      <p>
-        Ours, Merged and Theirs sit side by side, each with its own hierarchy and inspector.
-        Selection, expansion and scrolling stay in step. All three columns share one row plan, so a
-        property lands at the same height in every column by construction, not by syncing scroll
-        positions and hoping. Drag a column's header to rearrange the three into whatever order
-        you read best. Values are shown rather than edited: one enters the merge by picking a side,
-        so there's no third version of the truth to keep track of.
-      </p>
-    </div>
-    <figure class="feature-shot">
-      <a class="zoom" href="shots/window.png"><img src="shots/window.png" alt="The three-panel Conflux window with a real conflict open"></a>
-      <figcaption>Ours, Merged and Theirs, sharing one row plan across all three columns.</figcaption>
-    </figure>
-  </section>
+    <div class="carousel" tabindex="0" role="group" aria-label="Feature screenshots, scrollable">
 
-  <section class="feature">
-    <div class="feature-text">
-      <h2>Resolve as coarsely or as finely as you want</h2>
-      <p>
-        One arrow takes a whole GameObject or component from one side. If you'd rather go property
-        by property, every diffing row carries its own picker. Narrower wins over wider: refine a
-        property after taking a branch and the refinement sticks, while a fresh pick at a wider
-        scope answers for that whole scope again and discards the refinements under it.
-      </p>
-      <p>
-        Changes only one side made get pickers too, not just clashes. They already resolve to the
-        side that made them, so a change of yours the other branch never touched survives without
-        you doing anything, and the picker is there for the other answer: throwing it away on
-        purpose. Every picker reports on its own scope, and what it reports is where that scope's
-        content comes from: an arrow lights when that side is the sole source of it, and a scope
-        drawn from both is outlined instead.
-      </p>
-      <p>
-        Until a scope is settled, its picker fills with how much of it is, left to right, like a
-        progress bar. Every difference counts, not only the clashes, so a branch holding four
-        changes and one open conflict opens four fifths full and completes when you answer the
-        last one. The topmost picker is the whole file's progress, and you can see where the work
-        is left without expanding anything.
-      </p>
-    </div>
-    <figure class="feature-shot">
-      <a class="zoom" href="shots/pickers.png"><img src="shots/pickers.png" alt="Inspector rows showing each side's value and the picker that chooses between them"></a>
-      <figcaption>Each side's value in its own column, with the picker on Merged. Click to enlarge.</figcaption>
-    </figure>
-  </section>
+      <article class="slide">
+        <figure class="slide-shot">
+          <a class="zoom" href="shots/markers.png">
+            <span class="frame scrolls">
+              <img src="shots/markers.png" alt="Status markers on hierarchy rows across all three panels, with the toolbar tally above them">
+            </span>
+          </a>
+        </figure>
+        <div class="slide-text">
+          <div>
+            <span class="eyebrow">The diff</span>
+            <h3>Semantic three-way diff</h3>
+          </div>
+          <div>
+            <p>
+              Every GameObject, component and property is classified against the common
+              ancestor: added, removed, changed on one side, changed the same way on both, or a
+              real clash. Only the clashes need your input. The rest merge on their own.
+              Markers sit on every row, with a running tally along the toolbar.
+            </p>
+          </div>
+        </div>
+      </article>
 
-  <section class="feature">
-    <div class="feature-text">
-      <h2>A merged preview you can open</h2>
-      <p>
-        The merged result is rebuilt from scratch after every decision and opens in Unity's real
-        Prefab Mode. It's the actual prefab, built by the same APIs that will write it when you hit
-        Apply. It refreshes as you decide and leaves the Scene View where you put it, so you can
-        frame the part you care about and watch it settle.
-      </p>
-    </div>
-    <figure class="feature-shot">
-      <a class="zoom" href="shots/prefab-mode.png"><img src="shots/prefab-mode.png" alt="The merged prefab open in Unity's Prefab Mode below the Conflux window"></a>
-      <figcaption>The merged result staged as a real prefab, open in Prefab Mode below the window.</figcaption>
-    </figure>
-  </section>
+      <article class="slide">
+        <figure class="slide-shot">
+          <a class="zoom" href="shots/pickers.png">
+            <span class="frame scrolls">
+              <img src="shots/pickers.png" alt="Inspector rows showing each side's value and the picker that chooses between them">
+            </span>
+          </a>
+        </figure>
+        <div class="slide-text">
+          <div>
+            <span class="eyebrow">The pickers</span>
+            <h3>As coarse or as fine as you want</h3>
+          </div>
+          <div>
+            <p>
+              One arrow takes a whole GameObject or component from one side; every diffing row
+              also carries its own picker. Narrower wins over wider, so a property refined after
+              taking a branch keeps its refinement. Each picker fills like a progress bar as its
+              scope settles.
+            </p>
+          </div>
+        </div>
+      </article>
 
-  <section class="feature">
-    <div class="feature-text">
-      <h2>Structure gets its own decisions</h2>
-      <p>
-        Sibling order, component order and reparenting are tracked apart from values, so a reorder
-        on one branch and an edit on the other can both survive. A list only one branch rearranged
-        is that branch's and needs no answer; what waits for you is both branches rearranging the
-        same list differently, where the result really does depend on which one you follow. When
-        neither side's order is what you want, arrange it yourself in the Merged panel.
-      </p>
-    </div>
-    <figure class="feature-shot">
-      <a class="zoom" href="shots/structure.png"><img src="shots/structure.png" alt="Order, reparent and manual arrange controls on the Merged panel"></a>
-      <figcaption>The Merged column's right edge: order, placement and manual arrange.</figcaption>
-    </figure>
-  </section>
+      <article class="slide">
+        <figure class="slide-shot">
+          <a class="zoom" href="shots/prefab-mode.png">
+            <span class="frame scrolls">
+              <img src="shots/prefab-mode.png" alt="The merged prefab open in Unity's Prefab Mode below the Conflux window">
+            </span>
+          </a>
+        </figure>
+        <div class="slide-text">
+          <div>
+            <span class="eyebrow">The preview</span>
+            <h3>A merged preview you can open</h3>
+          </div>
+          <div>
+            <p>
+              The merged result is rebuilt after every decision and opens in Unity's Prefab Mode.
+              It is the actual prefab, built by the same APIs that will write it when you hit Apply.
+              It refreshes as you decide, and you can frame the part you care about and watch it settle.
+            </p>
+          </div>
+        </div>
+      </article>
 
-  <section class="feature-pair">
-    <div>
-      <h3>It backs up before it overwrites</h3>
-      <p>
-        Before it overwrites anything, Apply spells out what will change in the file on your side:
-        what's added, removed, moved, and which property of which object ends up different.
-        Apply also offers to save the prefab as it stood on your side before the merge, taken from the
-        clean version rather than the marker-riddled file in your working copy. It lands in
-        <code>ConfluxBackups/</code> in the project folder, or wherever you point it in Preferences;
-        aim it inside <code>Assets/</code> and backups get a <code>.bak</code> extension so Unity
-        never imports one as a second prefab. If the backup can't be written, nothing is overwritten.
-      </p>
-    </div>
-    <div>
-      <h3>It checks what it wrote</h3>
-      <p>
-        Every merge tool tells you it succeeded. This one reads the file back through Unity's own
-        loader afterwards and compares it with the result you approved: every object, every
-        component and its position in the list, every serialized value, every reference.
-        Agreement is silent. A difference is named, object by object and property by property,
-        along with where your backup went. It's a self-check, not a second opinion, and it
-        catches the half no confirmation dialog can: what Unity's serializer did after you
-        clicked.
-      </p>
-      <p>
-        Identity is part of that comparison. A prefab's objects are named from outside the file
-        by an id, so a merge that quietly renumbers them leaves every variant, every scene
-        instance and every reference pointing into the prefab aimed at nothing, while the file
-        itself reads as perfectly correct. Yours keep their ids, the objects arriving from the
-        other branch get theirs back, and the check says so rather than assuming it.
-      </p>
-    </div>
-  </section>
+      <article class="slide">
+        <figure class="slide-shot">
+          <a class="zoom" href="shots/structure.png">
+            <span class="frame scrolls">
+              <img src="shots/structure.png" alt="Order, reparent and manual arrange controls on the Merged panel">
+            </span>
+          </a>
+        </figure>
+        <div class="slide-text">
+          <div>
+            <span class="eyebrow">Structure</span>
+            <h3>Structure gets its own decisions</h3>
+          </div>
+          <div>
+            <p>
+              Sibling order, component order and reparenting are tracked apart from values, so a
+              reorder on one branch and an edit on the other can both survive. When neither side's
+              order is what you want, arrange it yourself in the Merged panel.
+            </p>
+          </div>
+        </div>
+      </article>
 
-  <section class="feature-pair">
-    <div>
-      <h3>Variants and nested prefabs</h3>
-      <p>
-        A variant's file has almost nothing in it: a reference to its base and a few stubs.
-        Conflux reads the base and shows the inherited hierarchy inline, so a variant's panels
-        look like the prefab does in the Inspector rather than like the three objects the file
-        happens to contain. Overrides and renames on inherited objects come with it, and an
-        ordinary nested instance is read the same way, so a per-branch override lands on the
-        object it belongs to.
-      </p>
-      <p>
-        Deletions too. A variant doesn't leave a deleted object out of its file, it records that it
-        removed one, and a tool that reads the overrides and ignores that list hands the object
-        back: the branch that deleted something quietly loses the argument. Here it's marked
-        deleted on that side, the row is ghosted, and you're asked. Delete on one side against an
-        edit on the other is a clash, which is what it is.
-      </p>
-      <p>
-        One shape it won't merge, and says so: an instance one branch unpacked. Unpacking mints
-        fresh fileIDs for the whole subtree, so nothing in it can be matched to what it used to be,
-        and there is no honest merge left to make. You get a warning strip on that side instead of
-        a confident wrong answer.
-      </p>
     </div>
-    <div>
-      <h3>Whatever you version with</h3>
-      <p>
-        Git, Subversion, Mercurial, Perforce and Plastic SCM. Detection is automatic, and only the
-        step that fetches the three versions differs between them, so everything you see and every
-        decision you make is identical either way. Plastic needs its external merge tool pointed at
-        Conflux once; the launcher is generated for you.
-      </p>
-    </div>
-  </section>
 
-  <section class="feature-pair">
-    <div>
-      <h3>Keep both</h3>
-      <p>
-        Where both branches appended to the same list, take both. It starts from Theirs, appends
-        the Ours entries that aren't already present, keeps the order and skips duplicates. Two
-        entries are the same one when every value they're made of agrees, so references, strings
-        and lists of your own structs all work without Conflux knowing anything about the type.
-        The one shape it won't offer is an entry that holds an array of its own.
-      </p>
-    </div>
-    <div>
-      <h3>Show only what you're looking for</h3>
-      <p>
-        The tally beside the toolbar is also the filter. Open it and a checkbox slides onto each
-        kind: uncheck one and it leaves the hierarchies and the inspector together, rows, markers,
-        component blocks and property rows alike. An object stays while anything under it still
-        matches, so narrowing to deletions doesn't hide the parents you reach them through, and
-        rows keep how you left them when a kind comes back. Reorders are the exception, and
-        deliberately not a switch: they show only while everything else does, because an order
-        decision covers a whole list and a list with rows filtered out of it isn't one you can
-        answer for. Nothing is hidden from the write, though. The count of what's outstanding
-        still counts all of it, and Apply is still blocked by what you can't see.
-      </p>
-    </div>
-  </section>
-
-  <section class="feature-pair">
-    <div>
-      <h3>Built for a whole branch merge</h3>
-      <p>
-        A branch merge rarely conflicts in one prefab. The sidebar counts how many of the listed
-        conflicts already hold a merged result, and applying one opens the next that still needs
-        merging, so seven files isn't seven round trips. Turn that off in Preferences if you'd
-        rather stay on the result you just wrote.
-      </p>
-    </div>
-    <div>
-      <h3>Sample conflicts, built in</h3>
-      <p>
-        Fifteen hand-built scenarios: value clashes at two depths, identical edits, modify/delete,
-        sibling and component reorders, reparents, renames and objects added on both sides, an array both
-        branches appended to, nested prefab overrides, a prefab variant, an unpacked nested prefab,
-        and one that stacks all of it five levels deep. They open through the same pipeline a real
-        conflict does, so they're a decent way to learn the window before a real merge is on fire.
-        Only Apply differs: samples are read-only, since there's no conflicted file behind them.
-      </p>
-    </div>
-  </section>
-
-  <section class="feature-pair">
-    <div>
-      <h3>No apply all</h3>
-      <p>
-        Deliberately absent. Every write asks first and says what it will change, and a batch
-        would either skip that after the first file or ask you once per file anyway. Overwriting
-        prefabs in someone's repository is not a thing to do behind a single confirmation.
-      </p>
-    </div>
-    <div>
-      <h3>Send a broken merge back</h3>
-      <p>
-        If a merge comes out wrong, the window's tab menu exports a single zip: the three staged
-        versions exactly as your version control produced them, the decisions you made, and your
-        Unity version. It asks before it packages anything and sends nothing anywhere.
-      </p>
+    <div class="shell carousel-foot">
+      <div class="dots" role="tablist" aria-label="Choose a feature"></div>
+      <p class="carousel-hint">Scroll sideways, swipe, or use the arrow keys.</p>
     </div>
   </section>
 
 </main>
 
-<section class="wrap block" id="how">
+<section class="cta-band reveal">
+  <div class="shell cta-band-inner">
+    <div>
+      <h2>Coming to the Asset Store</h2>
+      <p>
+        The listing isn't live yet. Until it is, the forum thread and Discord are where updates land.
+        If you hit a conflict it can't handle, send it my way: real broken prefabs are the only thing
+        that makes a merge tool better.
+      </p>
+    </div>
+    <div class="cta-band-actions">
+      <a class="cta" href="https://discussions.unity.com/t/conflux-prefab-merge-tool-for-unity/1733311">Follow progress on the forum</a>
+      <a class="cta-secondary" href="https://discord.gg/Bf45bwvPCG">Discord</a>
+    </div>
+  </div>
+</section>
+
+<section class="shell block reveal" id="how">
+  <span class="eyebrow">Start to finish</span>
   <h2>How a merge goes</h2>
+  <div class="steps-panel">
   <ol class="steps">
     <li>Start a merge that produces conflicts on <code>.prefab</code> files under <code>Assets/</code>.</li>
-    <li>Open <strong>Tools &rsaquo; Conflux &rsaquo; Merge</strong>. Conflicted prefabs are listed down the left. <strong>Open</strong> starts fresh; <strong>Resume</strong> restores the decisions you made last time, so a big merge doesn't have to be one sitting.</li>
+    <li>Open <strong>Tools &#x203A; Conflux &#x203A; Merge</strong>. Conflicted prefabs are listed down the left. <strong>Open</strong> starts fresh; <strong>Resume</strong> restores your decisions from last time.</li>
     <li>Resolve. Per entity from the hierarchy rows, per property from the inspector.</li>
-    <li>Follow the toolbar tally (conflicts, changes, identical changes, additions, deletions, reorders), narrow the panels to the kinds you care about with the filter beside it, and jump between unresolved items with <strong>▲ / ▼</strong>.</li>
-    <li>Check the result with <strong>Preview</strong> (the ◫ button), which opens the merged prefab in Prefab Mode.</li>
-    <li><strong>Apply</strong> writes the merged prefab over the conflicted file, then reads it back and checks it against the result you approved. It stays disabled until nothing is left unresolved.</li>
+    <li>Follow the toolbar tally, narrow the panels to the kinds you care about with the filter beside it, and jump between unresolved items with <strong>&#x25B2; / &#x25BC;</strong>.</li>
+    <li>Check the result with <strong>Preview</strong>, which opens the merged prefab in Prefab Mode.</li>
+    <li><strong>Apply</strong> writes the merged prefab over the conflicted file, then reads it back and checks it against the result you approved.</li>
   </ol>
-  <p class="note">
+  </div>
+  <p class="note steps-note">
     Apply writes the file and stops. No <code>git add</code>, no <code>p4 resolve</code>, no
-    <code>svn resolved</code>. Marking a conflict resolved is what declares a merge finished, and
-    that's your call to make once you've looked at the result. A wrong file is recoverable. A
-    conflict you resolved by mistake quietly isn't.
+    <code>svn resolved</code>. Marking a conflict resolved is your call to make once you've looked
+    at the result.
   </p>
 </section>
 
-<section class="wrap block" id="limitations">
-  <h2>Limitations</h2>
-  <p>Worth knowing before you build a workflow on it:</p>
-  <ul class="limits">
-    <li><strong>Prefabs only.</strong> Scene (<code>.unity</code>) conflicts aren't supported. Scenes have many roots plus settings singletons that would diff happily and then never rebuild.</li>
-    <li><strong>Custom editors aren't drawn.</strong> A component with a <code>[CustomEditor]</code> shows its default field list, with no custom layout or buttons. This one is structural: keeping rows aligned across three columns means knowing each row's height before drawing it, and <code>OnInspectorGUI</code> won't tell you. Custom property <em>drawers</em> do work. One side effect: Conflux can show more fields than Unity does, since a field a custom editor chooses not to draw is still visible to the property iterator.</li>
-    <li><strong>Git is the one that has been proven.</strong> Real conflicts out of real repositories, continuously, including a captured real-world prefab variant conflict. Subversion, Mercurial, Perforce and the Plastic handoff are written against their documented CLI behaviour and covered by parser tests, but have not been run through a live merge yet.</li>
-    <li><strong>Only exercised on Windows so far.</strong> Nothing in it is Windows-specific and paths go through the platform's own APIs, but macOS and Linux haven't been run yet.</li>
-    <li><strong>A variant needs its base resolved first.</strong> A merged variant is rebuilt against its base prefab, so if that base can't be loaded, almost always because it's conflicted too, the result would be written without it. Conflux refuses to open the variant and marks the row, rather than letting you work through it and hit a wall at the end.</li>
-    <li><strong>Nested instances of an unresolvable prefab still open, but can't be applied.</strong> Where a variant is refused up front, an ordinary nested instance is only caught at Apply: the rest of that merge resolves normally, and it is only the write that would drop content.</li>
-    <li><strong>Applying a non-variant nested instance has never been checked by hand.</strong> Both shapes have been opened against captured real conflicts, a prefab variant and an ordinary nested instance carrying per-branch overrides, and each pass found and fixed real bugs. Nobody has written a non-variant instance back and reopened the result. Apply's read-back check covers that ground automatically now, which is not the same as somebody having looked.</li>
-  </ul>
+<section class="details reveal" id="details">
+  <div class="details-head">
+    <span class="eyebrow">Under the hood</span>
+    <h2>Safety, variants and everything else</h2>
+  </div>
+  <div class="details-grid">
+  <div>
+    <h3>It backs up before it overwrites</h3>
+    <p>
+      Before it overwrites anything, Apply spells out what will change. It also saves
+      the prefab as it stood on your side before the merge, in
+      <code>ConfluxBackups/</code> or wherever you point it. If the backup can't be
+      written, nothing is overwritten.
+    </p>
+  </div>
+  <div>
+    <h3>It checks what it wrote</h3>
+    <p>
+      After writing, it reads the file back through Unity's loader and compares it with
+      the result you approved: every object, component, value and reference. A difference
+      is named object by object. Identity is part of that check, so quietly renumbered
+      fileIDs are caught before they break every variant and scene reference.
+    </p>
+  </div>
+  <div>
+    <h3>Variants and nested prefabs</h3>
+    <p>
+      Conflux reads the base and shows the inherited hierarchy inline, so a variant looks
+      like the prefab does in the Inspector. Overrides and deletions on inherited objects
+      are tracked per side. Unpacked instances are refused with a warning rather than
+      silently merged wrong.
+    </p>
+  </div>
+  <div>
+    <h3>Keep both</h3>
+    <p>
+      Where both branches appended to the same list, take both. It starts from Theirs,
+      appends the Ours entries that aren't already present, keeps the order and skips
+      duplicates. References, strings and lists of your own structs all work.
+    </p>
+  </div>
+  <div>
+    <h3>Whatever you version with</h3>
+    <p>
+      Git, Subversion, Mercurial, Perforce and Plastic SCM. Detection is automatic, and
+      everything you see is identical either way. It can also serve as an external merge
+      tool for any of the five.
+    </p>
+  </div>
+  <div>
+    <h3>Show only what you're looking for</h3>
+    <p>
+      The tally beside the toolbar is also the filter. Uncheck a kind and its rows leave
+      all three panels together. Nothing is hidden from the write: the outstanding count
+      still counts all of it, and Apply is still blocked by what you can't see.
+    </p>
+  </div>
+  <div>
+    <h3>Built for a whole branch merge</h3>
+    <p>
+      The sidebar counts how many of the listed conflicts hold a merged result, and
+      applying one opens the next, so seven files isn't seven round trips.
+    </p>
+  </div>
+  <div>
+    <h3>Sample conflicts, built in</h3>
+    <p>
+      Fifteen hand-built scenarios covering value clashes, identical edits, modify/delete,
+      reorders, reparents, nested overrides, variants and more. They open through the same
+      pipeline a real conflict does.
+    </p>
+  </div>
+  </div>
 </section>
 
-<section class="wrap block" id="technical">
-  <h2>Technical details</h2>
-  <ul class="plain">
-    <li><strong>Unity 2021.2+</strong>. <code>PrefabStageUtility</code> moved out of the <code>Experimental</code> namespace in 2021.2, which sets the floor; the rest of the API surface has been stable since 2018.3.</li>
-    <li><strong>Editor-only.</strong> Nothing ships in a build and nothing runs at runtime.</li>
-    <li><strong>Git, Subversion, Mercurial, Perforce and Plastic SCM</strong> (Unity Version Control). Detection is automatic; pin one in Preferences if a project sits under two at once. Plastic has no conflict list to read, so it hands each conflict to an external merge tool: generate the launcher from Preferences and point Plastic at it once, and merges then appear in the sidebar on their own.</li>
-    <li><strong>No dependencies.</strong> It talks to the version control CLI already on your machine. No packages, no services.</li>
-    <li><strong>Full C# source, no DLLs</strong>, and no C# 8+ syntax, so it keeps compiling on the language versions that came with older editors. Nothing in it is a black box.</li>
-    <li><strong>Render pipeline agnostic.</strong> Built-in, URP and HDRP behave the same, since the tool draws editor UI and never touches rendering.</li>
-    <li><strong>It can be an external merge tool for any of the five.</strong> The launcher takes base, ours, theirs and output in that order, which is what makes <code>git mergetool</code> in a terminal open the conflict in an Editor that's already running.</li>
-    <li><strong>Exclusive checkout is respected.</strong> Under Perforce and Plastic, Apply runs <code>p4 edit</code> if the file is read-only, and never clears the read-only bit behind the server's back.</li>
-    <li><strong>Tested.</strong> An EditMode suite covers parsing, diffing and resolution as plain data, the merged result as real Unity objects, and the written file read back and compared. Some of it runs against captured real conflicts that ship with the package.</li>
-    <li><strong>Unity does the serialization.</strong> The merged prefab is written with <code>SaveAsPrefabAsset</code>, so the tool stays largely immune to prefab-format changes. The one thing it edits afterwards is the numbers that identify objects, putting back the ids the merge took from the other branch, and the file is read back and compared before you are told it worked.</li>
-    <li><strong>English and Portuguese.</strong> A translation is one JSON file named by its language code, and any key it omits falls back to English, so a partial one is perfectly usable.</li>
-  </ul>
+<section class="details reveal" id="limitations">
+  <div class="details-head">
+    <span class="eyebrow">Before you commit</span>
+    <h2>Limitations</h2>
+  </div>
+  <div class="details-grid">
+  <div>
+    <h3>Prefabs only</h3>
+    <p>Scene (<code>.unity</code>) conflicts aren't supported. Scenes have many roots plus settings singletons that would diff happily and then never rebuild.</p>
+  </div>
+  <div>
+    <h3>Custom editors aren't drawn</h3>
+    <p>A component with a <code>[CustomEditor]</code> shows its default field list. Custom property <em>drawers</em> do work. One side effect: Conflux can show more fields than Unity does.</p>
+  </div>
+  <div>
+    <h3>Git is the one that has been proven</h3>
+    <p>Real conflicts out of real repositories, continuously. The other four are written against documented CLI behaviour and covered by parser tests, but have not run through a live merge yet.</p>
+  </div>
+  <div>
+    <h3>Only exercised on Windows so far</h3>
+    <p>Nothing in it is Windows-specific and paths go through the platform's own APIs, but macOS and Linux haven't been run yet.</p>
+  </div>
+  <div>
+    <h3>A variant needs its base resolved first</h3>
+    <p>If the base is conflicted too, Conflux refuses to open the variant rather than letting you work through it and hit a wall at Apply.</p>
+  </div>
+  <div>
+    <h3>No apply all</h3>
+    <p>Deliberately absent. Every write asks first and says what it will change. Overwriting prefabs in someone's repository is not a thing to do behind a single confirmation.</p>
+  </div>
+  </div>
 </section>
 
-<section class="wrap block closing">
-  <h2>Coming to the Asset Store</h2>
-  <p>
-    The listing isn't live yet. Until it is, the forum thread and Discord are where updates land.
-    If you hit a conflict it can't handle, send it my way: real broken prefabs are the only thing
-    that makes a merge tool better.
-  </p>
-  <p class="note purchase-note">
-    Purchases are completed through the Unity Asset Store. Licensing, payment, downloads and
-    refunds are handled by Unity, not by this site.
-  </p>
-  <p class="cta-row">
-    <a class="cta" href="https://discussions.unity.com/t/conflux-prefab-merge-tool-for-unity/1733311">Follow progress on the forum</a>
-    <a class="cta-secondary" href="https://discord.gg/Bf45bwvPCG">Discord</a>
-  </p>
+<section class="details reveal" id="technical">
+  <div class="details-head">
+    <span class="eyebrow">Specs</span>
+    <h2>Technical details</h2>
+  </div>
+  <div class="details-grid">
+  <div>
+    <h3>Unity 2021.2+</h3>
+    <p><code>PrefabStageUtility</code> moved out of the <code>Experimental</code> namespace in 2021.2, which sets the floor. The rest of the API surface has been stable since 2018.3.</p>
+  </div>
+  <div>
+    <h3>Editor-only</h3>
+    <p>Nothing ships in a build and nothing runs at runtime. No dependencies. It talks to the version control CLI already on your machine.</p>
+  </div>
+  <div>
+    <h3>Full C# source, no DLLs</h3>
+    <p>No C# 8+ syntax, so it keeps compiling on the language versions that came with older editors. Nothing in it is a black box.</p>
+  </div>
+  <div>
+    <h3>Tested</h3>
+    <p>An EditMode suite covers parsing, diffing and resolution as plain data, the merged result as real Unity objects, and the written file read back and compared.</p>
+  </div>
+  <div>
+    <h3>Render pipeline agnostic</h3>
+    <p>Built-in, URP and HDRP behave the same, since the tool draws editor UI and never touches rendering.</p>
+  </div>
+  <div>
+    <h3>English and Portuguese</h3>
+    <p>A translation is one JSON file named by its language code; any key it omits falls back to English, so a partial one is perfectly usable.</p>
+  </div>
+  </div>
 </section>
+
 
 <footer>
   <div class="wrap">
@@ -396,13 +402,12 @@
 
   function close() {
     box.hidden = true;
-    full.removeAttribute('src'); // so a reopen cannot flash the previous shot
+    full.removeAttribute('src');
     document.body.style.overflow = '';
   }
 
   document.querySelectorAll('a.zoom').forEach(function (link) {
     link.addEventListener('click', function (e) {
-      // Let modified clicks through: a new tab is a reasonable thing to want here.
       if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
 
       e.preventDefault();
@@ -415,6 +420,145 @@
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape' && !box.hidden) close();
   });
+})();
+
+(function () {
+  var motionOk = !window.matchMedia
+    || !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var items = document.querySelectorAll('.reveal');
+
+  function revealAll() {
+    items.forEach(function (el) { el.classList.add('shown'); });
+  }
+
+  if (!motionOk || !('IntersectionObserver' in window) || !items.length) {
+    revealAll();
+  } else {
+    document.documentElement.classList.add('js-reveal');
+
+    var seen = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+
+        entry.target.classList.add('shown');
+        seen.unobserve(entry.target);
+      });
+    }, { rootMargin: '0px 0px -12% 0px', threshold: 0.06 });
+
+    items.forEach(function (el) { seen.observe(el); });
+
+    window.setTimeout(function () {
+      var missed = document.querySelectorAll('.reveal:not(.shown)');
+
+      if (missed.length === items.length) revealAll();
+    }, 1200);
+  }
+
+  var nav = document.querySelector('.topnav');
+  var ticking = false;
+
+  function mark() {
+    nav.classList.toggle('scrolled', window.scrollY > 8);
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', function () {
+    if (ticking) return;
+
+    ticking = true;
+    window.requestAnimationFrame(mark);
+  }, { passive: true });
+
+  mark();
+})();
+
+(function () {
+  var track = document.querySelector('.carousel');
+
+  if (!track) return;
+
+  var slides = Array.prototype.slice.call(track.querySelectorAll('.slide'));
+  var dotsBox = document.querySelector('.dots');
+  var arrows = Array.prototype.slice.call(document.querySelectorAll('.carousel-arrow'));
+
+  if (slides.length < 2) return;
+
+  function currentIndex() {
+    var best = 0;
+    var shortest = Infinity;
+
+    slides.forEach(function (slide, i) {
+      var distance = Math.abs(slide.offsetLeft - slides[0].offsetLeft - track.scrollLeft);
+
+      if (distance < shortest) {
+        shortest = distance;
+        best = i;
+      }
+    });
+
+    return best;
+  }
+
+  function goTo(i) {
+    var clamped = Math.max(0, Math.min(slides.length - 1, i));
+
+    track.scrollTo({
+      left: slides[clamped].offsetLeft - slides[0].offsetLeft,
+      behavior: 'smooth'
+    });
+  }
+
+  var dots = slides.map(function (slide, i) {
+    var dot = document.createElement('button');
+
+    dot.className = 'dot';
+    dot.type = 'button';
+    dot.setAttribute('role', 'tab');
+    dot.setAttribute('aria-label', 'Feature ' + (i + 1) + ' of ' + slides.length);
+    dot.addEventListener('click', function () { goTo(i); });
+    dotsBox.appendChild(dot);
+
+    return dot;
+  });
+
+  arrows.forEach(function (button) {
+    button.addEventListener('click', function () {
+      goTo(currentIndex() + Number(button.dataset.dir));
+    });
+  });
+
+  track.addEventListener('keydown', function (e) {
+    if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+
+    e.preventDefault();
+    goTo(currentIndex() + (e.key === 'ArrowRight' ? 1 : -1));
+  });
+
+  function sync() {
+    var i = currentIndex();
+
+    dots.forEach(function (dot, at) {
+      dot.setAttribute('aria-selected', at === i ? 'true' : 'false');
+    });
+
+    arrows[0].disabled = i === 0;
+    arrows[1].disabled = i === slides.length - 1;
+  }
+
+  var pending = false;
+
+  track.addEventListener('scroll', function () {
+    if (pending) return;
+
+    pending = true;
+    window.requestAnimationFrame(function () {
+      pending = false;
+      sync();
+    });
+  }, { passive: true });
+
+  window.addEventListener('resize', sync);
+  sync();
 })();
 </script>
 
