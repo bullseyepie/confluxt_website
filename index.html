@@ -288,20 +288,8 @@
   </div>
   <div class="details-grid">
   <div>
-    <h3>Prefabs only</h3>
-    <p>Scene (<code>.unity</code>) conflicts aren't supported. Scenes have many roots plus settings singletons that would diff happily and then never rebuild.</p>
-  </div>
-  <div>
     <h3>Custom editors aren't drawn</h3>
     <p>A component with a <code>[CustomEditor]</code> shows its default field list. Custom property <em>drawers</em> do work. One side effect: Conflux can show more fields than Unity does.</p>
-  </div>
-  <div>
-    <h3>Git is the one that has been proven</h3>
-    <p>Real conflicts out of real repositories, continuously. The other four are written against documented CLI behaviour and covered by parser tests, but have not run through a live merge yet.</p>
-  </div>
-  <div>
-    <h3>Only exercised on Windows so far</h3>
-    <p>Nothing in it is Windows-specific and paths go through the platform's own APIs, but macOS and Linux haven't been run yet.</p>
   </div>
   <div>
     <h3>A variant needs its base resolved first</h3>
@@ -320,6 +308,18 @@
     <h2>Technical details</h2>
   </div>
   <div class="details-grid">
+  <div>
+    <h3>Prefabs, scenes in progress</h3>
+    <p>Prefab (<code>.prefab</code>) merges are the intended scope. Scene (<code>.unity</code>) support is a work in progress: scenes have many roots plus settings singletons that would diff happily and then never rebuild.</p>
+  </div>
+  <div>
+    <h3>Git, SVN, Mercurial, Perforce, Plastic</h3>
+    <p>Conflicts are read from whichever of the five you use, through the version control CLI already on your machine. Plastic SCM points its external merge tool at Conflux once; the other four are detected automatically.</p>
+  </div>
+  <div>
+    <h3>Windows, macOS and Linux</h3>
+    <p>Paths and processes go through the platform's own APIs, with no hardcoded separators or Windows-specific calls, so the same editor tool runs on all three.</p>
+  </div>
   <div>
     <h3>Unity 2021.2+</h3>
     <p><code>PrefabStageUtility</code> moved out of the <code>Experimental</code> namespace in 2021.2, which sets the floor. The rest of the API surface has been stable since 2018.3.</p>
