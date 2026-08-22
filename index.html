@@ -28,6 +28,7 @@
     <a href="#features">Features</a>
     <a href="#how">How it works</a>
     <a href="#limitations">Limitations</a>
+    <a href="#technical">Technical details</a>
     <div class="social-links nav-social">
       <a href="https://discussions.unity.com/t/conflux-prefab-merge-tool-for-unity/1733311" title="Unity Forum thread" aria-label="Unity Forum thread" class="social-link is-unity">
         <img class="ico" src="icons/forum.svg" alt="" aria-hidden="true">
@@ -308,6 +309,10 @@
     <h2>Technical details</h2>
   </div>
   <div class="details-grid">
+  <div>
+    <h3>Built for small and very large prefabs</h3>
+    <p>Every panel is version-gated and cached, the hierarchies draw only the rows on screen, and the inspector renders only the selected object. A tiny prefab and one with thousands of objects both stay responsive; on the largest, the live preview steps aside automatically so each decision is instant.</p>
+  </div>
   <div>
     <h3>Prefabs, scenes in progress</h3>
     <p>Prefab (<code>.prefab</code>) merges are the intended scope. Scene (<code>.unity</code>) support is a work in progress: scenes have many roots plus settings singletons that would diff happily and then never rebuild.</p>
