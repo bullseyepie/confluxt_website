@@ -289,10 +289,6 @@
   </div>
   <div class="details-grid">
   <div>
-    <h3>Custom editors aren't drawn</h3>
-    <p>A component with a <code>[CustomEditor]</code> shows its default field list. Custom property <em>drawers</em> do work. One side effect: Conflux can show more fields than Unity does.</p>
-  </div>
-  <div>
     <h3>A variant needs its base resolved first</h3>
     <p>If the base is conflicted too, Conflux refuses to open the variant rather than letting you work through it and hit a wall at Apply.</p>
   </div>
@@ -316,6 +312,10 @@
   <div>
     <h3>Prefabs, scenes in progress</h3>
     <p>Prefab (<code>.prefab</code>) merges are the intended scope. Scene (<code>.unity</code>) support is a work in progress: scenes have many roots plus settings singletons that would diff happily and then never rebuild.</p>
+  </div>
+  <div>
+    <h3>Your custom editors, drawn</h3>
+    <p>A component with your own <code>[CustomEditor]</code> shows that inspector, read-only, above its rows, so it is recognisable at a glance. The rows underneath still carry every per-property decision, and the block folds away when you would rather just merge.</p>
   </div>
   <div>
     <h3>Git, SVN, Mercurial, Perforce, Plastic</h3>
