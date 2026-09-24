@@ -251,15 +251,6 @@ a { color: var(--accent); }
   --brand-glow: rgba(46, 196, 182, 0.35);
 }
 
-/* The Asset Store icon until the listing is live: dimmed, with a dashed edge, so it reads as a
-   placeholder rather than a working link. */
-.social-link.is-soon {
-  opacity: 0.5;
-  border-style: dashed;
-}
-
-.social-link.is-soon:hover { opacity: 0.85; }
-
 .cta, .cta-secondary {
   display: inline-block;
   padding: 11px 22px;
